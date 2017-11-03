@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Examples extends CI_Controller {
+class Crud extends CI_Controller {
 
 	public function __construct()
 	{
@@ -14,7 +14,7 @@ class Examples extends CI_Controller {
 
 	public function _example_output($output = null)
 	{
-		$this->load->view('example.php',(array)$output);
+		$this->load->view('crud.php',(array)$output);
 	}
 
 	public function offices()
