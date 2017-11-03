@@ -28,7 +28,7 @@ foreach($css_files as $file): ?>
 		<a href='<?php echo site_url('crud/evaluacion')?>'>Evaluación</a> |
 		<a href='<?php echo site_url('crud/bibliografia')?>'>Bibliografía</a> |
 		<a href='<?php echo site_url('crud/error')?>'>Error</a> |
-		<a href='<?php echo site_url('login/stop')?>'>Salir</a>
+		<a href='<?php echo site_url('login/stop')?>'>Salir</a> |
 	</div>
 	<div style='height:20px;'></div>
     <div>
