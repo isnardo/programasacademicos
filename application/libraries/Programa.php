@@ -244,7 +244,7 @@ class Programa{
     if( $this->estrategias ){
       $html = '<ul>';
       foreach( $this->estrategias->result() as $row ){
-        $html = $html.'<li>'.$row->EstEsenanzaNombre.'</li>';
+        $html = $html.'<li>'.$row->EstEnsenanzaNombre.'</li>';
       }
       $html = $html.'</ul>';
     } // END IF

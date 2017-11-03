@@ -13,6 +13,7 @@ foreach($css_files as $file): ?>
 </head>
 <body>
 	<div>
+		<a href='<?php echo site_url('inicio')?>'>Inicio</a> |
 		<a href='<?php echo site_url('crud/usuario')?>'>Usuario</a> |
 		<a href='<?php echo site_url('crud/facultad')?>'>Entidad</a> |
 		<a href='<?php echo site_url('crud/licenciatura')?>'>Licenciaura</a> |
@@ -23,7 +24,11 @@ foreach($css_files as $file): ?>
 		<a href='<?php echo site_url('crud/unidad')?>'>Unidades</a> |
 		<a href='<?php echo site_url('crud/tema')?>'>Temas</a> |
 		<a href='<?php echo site_url('crud/subtema')?>'>SubTemas</a> |
-
+		<a href='<?php echo site_url('crud/estrategia')?>'>Estrategias</a> |
+		<a href='<?php echo site_url('crud/evaluacion')?>'>Evaluación</a> |
+		<a href='<?php echo site_url('crud/bibliografia')?>'>Bibliografía</a> |
+		<a href='<?php echo site_url('crud/error')?>'>Error</a> |
+		<a href='<?php echo site_url('login/stop')?>'>Salir</a>
 	</div>
 	<div style='height:20px;'></div>
     <div>

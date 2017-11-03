@@ -161,7 +161,7 @@ class User_model extends CI_Model {
 	}
 
 	// guarda un error reportado por un usuario
-	public function saver_error( $data ){
+	public function save_error( $data ){
 		// QUERY
 		$query =
 		'INSERT INTO Error
@@ -179,7 +179,7 @@ class User_model extends CI_Model {
 			$data['error'],
 			date('y-m-d'),
 			date('H:i:s'),
-			0
+			1
 		);
 
 		return $this->db->query( $query,$values );

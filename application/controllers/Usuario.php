@@ -76,7 +76,7 @@ class Usuario extends CI_Controller {
 			$data['user'] = $this->session->userdata('id');
 			$data['error'] = $this->input->post('error');
 
-			if( $this->user_model->saver_error( $data ) ){
+			if( $this->user_model->save_error( $data ) ){
 				$msg = '¡El error fue reportado exitosamente!';
 			}else{
 				$msg = '¡Hubo un problema al reportar el error!';

@@ -64,6 +64,14 @@ class Menu{
             'submenu'     => false
           ), // End firs level menu item
 
+          // CRUD
+          array( // First level menu item
+            'name'        => 'CRUD',
+            'controller'  => 'crud',
+            'icon'        => 'fa fa-table fa-fw',
+            'submenu'     => false
+          ), // End firs level menu item
+
           // PROGRAMAS ACADEMICOS
           array( // First level menu item
             'name'        => 'Programas académicos',

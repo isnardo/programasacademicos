@@ -171,7 +171,7 @@ class Programas_model extends CI_Model {
 		// Obtenemos estrategias de enseñanaza y aprendizaje
 		$query =
     ' SELECT *
-			FROM EstrategiaEsenanza
+			FROM EstrategiaEnsenanza
 			WHERE ProgAcademicoId = ?
     ';
 		//Execute query with security scape variables
