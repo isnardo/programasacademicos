@@ -82,6 +82,8 @@ class Login extends CI_Controller {
 					'email' 		=> $data->UsuarioEmail,
 					'type'			=> $data->TipoUsuNombre,
 					'type_id'		=> $data->TipoUsuId,
+					'facultad'		=> $data->FacultadNombre,
+					'licenciatura'		=> $data->LicenciaturaNombre,
 					'photo'			=> $data->UsuarioId.$data->UsuarioFoto,
 					'menu'			=> $this->menu->user_side_menu( $data->NivelUsuId ),
 					'login'			=> true

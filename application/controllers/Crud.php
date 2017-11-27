@@ -53,12 +53,20 @@ class Crud extends CI_Controller {
 		$crud = $this->new_crud('Error','Error');
 		$crud->set_relation('UsuarioId','Usuario','{UsuarioNombre} {UsuarioApellidos}');
 
-		$crud->display_as('ErrorId','No. Error')
+		$crud->display_as('ErrorId','Folio')
 			->display_as('UsuarioId','Usuario')
 			->display_as('ErrorDescripcion','Error')
 			->display_as('ErrorFecha','Fecha')
 			->display_as('ErrorHora','Hora')
 			->display_as('ErrorEstado','Estado');
+
+		$crud->columns(array(
+			'ErrorId',
+			'UsuarioId',
+			'ErrorFecha',
+			'ErrorHora',
+			'ErrorDescripcion'
+		));
 
 		$this->crud_output( $crud->render() );
 	}
@@ -172,12 +180,17 @@ class Crud extends CI_Controller {
 				'UsuarioPassword'
 			);
 			$crud->set_relation('NivelUsuId','NivelUsuario','NivelUsuNombre');
+			$crud->set_relation('FacultadId','Facultad','FacultadNombre');
+			$crud->set_relation('LicenciaturaId','Licenciatura','LicenciaturaNombre');
+
 			$crud->display_as('UsuarioAcceso','Alias')
 					 ->display_as('UsuarioEmail','Email')
 					 ->display_as('UsuarioNombre','Nombre')
 					 ->display_as('UsuarioApellidos','Apellidos')
 					 ->display_as('NivelUsuId','Nivel')
-					 ->display_as('UsuarioPassword','Contraseña');
+					 ->display_as('UsuarioPassword','Contraseña')
+					 ->display_as('FacultadNombre','Entidad')
+					 ->display_as('LicenciaturaNombre','Licenciatura');
 
 			$crud->field_type('UsuarioPassword', 'password');
 			$crud->unset_delete();

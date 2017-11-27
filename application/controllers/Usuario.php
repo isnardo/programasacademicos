@@ -29,70 +29,126 @@ class Usuario extends CI_Controller {
 		header( "Location: ".base_url('index.php/cpanel') );
 	}
 
+	// Check start session
+	private function validate_session(){
+		if( !$this->session->userdata('login') ){
+			header( "Location: ".base_url() );
+		}
+	}
+
 	public function perfil(){
-		if( $this->session->userdata('login') ){
-			$this->load->view('usuario/usuario_header');
-			$this->load->view('usuario/usuario_perfil');
-			$this->load->view('usuario/usuario_footer');
-		}else{
-			header( "Location: ".base_url() );
-		}
+		$this->validate_session();
+
+		$this->load->view('usuario/usuario_header');
+		$this->load->view('usuario/usuario_perfil');
+		$this->load->view('usuario/usuario_footer');
 	}
 
+	// Nuevo usuario
 	public function nuevo(){
-		if( $this->session->userdata('login') ){
-			$this->load->view('usuario/usuario_header');
-			$this->load->view('usuario/usuario_nuevo');
-			$this->load->view('usuario/usuario_footer');
-		}else{
-			header( "Location: ".base_url() );
-		}
+		$this->validate_session();
+
+		$this->load->view('usuario/usuario_header');
+		$this->load->view('usuario/usuario_nuevo');
+		$this->load->view('usuario/usuario_footer');
 	}
 
+	// Comentarios para los usuarios
 	public function comentarios(){
-		if( $this->session->userdata('login') ){
-			$this->load->library( 'user',array('id' => $this->session->userdata['id']) );
+		$this->validate_session();
+		$this->load->library( 'user',array('id' => $this->session->userdata['id']) );
 
-			// Render User Menu
-			$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
-			// tipo <- tipo de comentarios recibido por metodo GET
-			$data['tipo'] = $this->input->get('tipo');
-			// n <- número de comentarios que se recibe por método GET
-			$data['comentarios'] = $this->user->render_comentarios( $this->input->get('n') );
-			$data['error'] = $this->main->render_error_dialog();
+		// Render User Menu
+		$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
+		// tipo <- tipo de comentarios recibido por metodo GET
+		$data['tipo'] = $this->input->get('tipo');
+		// n <- número de comentarios que se recibe por método GET
+		$data['comentarios'] = $this->user->render_comentarios( $this->input->get('n') );
+		$data['error'] = $this->main->render_error_dialog();
 
-			$this->load->view('usuario/usuario_header');
-			$this->load->view('usuario/usuario_comentarios',$data);
-			$this->load->view('usuario/usuario_footer');
-		}else{
-			header( "Location: ".base_url() );
-		}
+		$this->load->view('usuario/usuario_header');
+		$this->load->view('usuario/usuario_comentarios',$data);
+		$this->load->view('usuario/usuario_footer');
 	}
 
-	public function error(){
-		if( $this->session->userdata('login') ){
-			$this->load->model('user_model');
+	// Modifica los datos del usuario que se encuentra en el sistema
+	public function contrasena(){
+		$this->validate_session();
 
-			$data['user'] = $this->session->userdata('id');
-			$data['error'] = $this->input->post('error');
+		$this->load->model('user_model');
 
-			if( $this->user_model->save_error( $data ) ){
-				$msg = '¡El error fue reportado exitosamente!';
-			}else{
-				$msg = '¡Hubo un problema al reportar el error!';
-			}
+		$data['error'] = $this->main->render_error_dialog();
+		$data['firstName'] = $this->session->userdata['firstName'];
+		$data['lastName'] = $this->session->userdata['lastName'];
+		$data['level'] = $this->session->userdata['level'];
+		$data['facultad'] = $this->session->userdata['facultad'];
+		$data['licenciatura'] = $this->session->userdata['licenciatura'];
+		$data['uid'] = $this->session->userdata['id'];
 
-			$json = array(
-				'mensaje'		=> $msg
-			);
 
-	 		$out = json_encode( $json );
-			header('Content-Type: application/json');
-			echo $out;
+		$this->load->view('usuario/usuario_header');
+		$this->load->view('usuario/usuario_contrasena',$data);
+		$this->load->view('usuario/usuario_footer');
 
+	}
+
+	public function modificar_contrasena(){
+		$this->validate_session();
+
+		$this->load->model('user_model');
+		$user = intval( $this->input->post('uid') );
+
+		$pass = $this->user_model->return_password_id( $user );
+
+		if( $pass && $pass === hash('sha256',$this->input->post('current-pass')) ){
+			$new_pass = hash('sha256',$this->input->post('new-pass'));
+
+			$data['UsuarioPassword'] = $new_pass;
+			$data['UsusarioId'] = $user;
+
+			$result = $this->user_model->update_password( $data );
+
+			$msg = 'Se actualizó correctamente la contraseña.';
+			$success = true;
 		}else{
-			header( "Location: ".base_url() );
+			$msg = 'ERROR: La contraseña actual es incorrecta.';
+			$success = false;
 		}
+
+		$json = array(
+			'success'		=> $success,
+			'mensaje'		=> $msg
+		);
+
+ 		$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
+	}
+
+	// Reporta un error del sistema
+	public function error(){
+		$this->validate_session();
+
+		$this->load->model('user_model');
+
+		$data['user'] = $this->session->userdata('id');
+		$data['error'] = $this->input->post('error');
+
+		$folio = $this->user_model->save_error( $data );
+
+		if( $folio ){
+			$msg = '¡El error fue reportado exitosamente! Número de folio: '.$folio;
+		}else{
+			$msg = '¡Hubo un problema al reportar el error!';
+		}
+		$json = array(
+			'mensaje'		=> $msg
+		);
+
+ 		$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
+
 	}
 
 

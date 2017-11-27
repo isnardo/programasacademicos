@@ -35,7 +35,25 @@ class Menu{
             'controller'  => 'programas/lista',
             'icon'        => 'fa fa-clipboard fa-fw',
             'submenu'     => false
+          ), // End firs level menu item
+
+          // USUARIO
+          array( // First level menu item
+            'name'        => 'Usuario',
+            'controller'  => '#',
+            'icon'        => 'fa fa-user fa-fw',
+            'submenu'     => true,
+            'submenu_list'=>
+            array(// Second level menu items list
+              array( // Second level item
+                'name'        => 'Contraseña',
+                'controller'  => 'usuario/contrasena',
+                'icon'        => 'fa fa-lock fa-fw',
+                'submenu'     => false
+              )
+            ) // End second level items list
           ) // End firs level menu item
+
         ); // End menu items array
         break;
 
@@ -145,13 +163,13 @@ class Menu{
                 'submenu'     => false
               ),
               array( // Second level item
-                'name'        => 'Modificar',
-                'controller'  => '#',
-                'icon'        => 'fa fa-vcard fa-fw',
+                'name'        => 'Contraseña',
+                'controller'  => 'usuario/contrasena',
+                'icon'        => 'fa fa-lock fa-fw',
                 'submenu'     => false
               )
             ) // End second level items list
-          ), // End firs level menu item
+          ) // End firs level menu item
         ); // End menu items array
         break;
     } // end switch

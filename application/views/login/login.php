@@ -53,7 +53,7 @@
 
                 <!-- Start Login error message -->
                 <div class="alert alert-danger alert-dismissable" id="divAlert" style="display:none;">
-                  Usuario y/o contraseña no validos.
+                  <b>Usuario y/o contraseña no validos.</b>
                 </div>
                 <!-- End Login error message-->
                 <div id="divLoading" style="display:none;position:absolute;z-index:10;top:30%;left: 45%;">

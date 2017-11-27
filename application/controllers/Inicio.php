@@ -24,33 +24,38 @@ class Inicio extends CI_Controller {
 		parent::__construct();
 	}
 
-	// Display Cpanel initial page
-	public function index()	{
-		$this->load->model('programas_model');
-		$this->load->model('user_model');
-
-		//Check if user is login to start cpanel
-		if( $this->session->userdata('login') ){
-			// Cargar lista de programas academicos disponibles
-			$lista = $this->programas_model->return_list( 1 );
-			$data['lista'] = $this->main->render_lista_programas( $lista );
-			//Modificaciones sugeridas por el usuario
-			$comments = $this->user_model->cuenta_comentarios( $this->session->userdata('id') );
-			$data['pendientes'] = $comments->Pendientes;
-			$data['url_pendientes'] = $this->main->controller('usuario/comentarios?tipo=Pendientes&n=1');
-			$data['aprobadas'] = $comments->Aprobadas;
-			$data['url_aprobadas'] = $this->main->controller('usuario/comentarios?tipo=Aprobadas&n=2');
-			$data['rechazadas'] = $comments->Rechazadas;
-			$data['url_rechazadas'] = $this->main->controller('usuario/comentarios?tipo=Rechazadas&n=3');
-
-			$data['menu']  = $this->menu->render_user_menu( $this->session->userdata['menu'] );
-			$data['error'] = $this->main->render_error_dialog();
-
-			$this->load->view('inicio/inicio_header');
-			$this->load->view('inicio/inicio',$data);
-			$this->load->view('inicio/inicio_footer');
-		}else{
+	// Check start session
+	private function validate_session(){
+		if( !$this->session->userdata('login') ){
 			header( "Location: ".base_url() );
 		}
 	}
+
+	// Display Cpanel initial page
+	public function index()	{
+		$this->validate_session();
+
+		$this->load->model('programas_model');
+		$this->load->model('user_model');
+
+		// Cargar lista de programas academicos disponibles
+		$lista = $this->programas_model->return_list( 1 );
+		$data['lista'] = $this->main->render_lista_programas( $lista );
+		//Modificaciones sugeridas por el usuario
+		$comments = $this->user_model->cuenta_comentarios( $this->session->userdata('id') );
+		$data['pendientes'] = $comments->Pendientes;
+		$data['url_pendientes'] = $this->main->controller('usuario/comentarios?tipo=Pendientes&n=1');
+		$data['aprobadas'] = $comments->Aprobadas;
+		$data['url_aprobadas'] = $this->main->controller('usuario/comentarios?tipo=Aprobadas&n=2');
+		$data['rechazadas'] = $comments->Rechazadas;
+		$data['url_rechazadas'] = $this->main->controller('usuario/comentarios?tipo=Rechazadas&n=3');
+
+		$data['menu']  = $this->menu->render_user_menu( $this->session->userdata['menu'] );
+		$data['error'] = $this->main->render_error_dialog();
+
+		$this->load->view('inicio/inicio_header');
+		$this->load->view('inicio/inicio',$data);
+		$this->load->view('inicio/inicio_footer');
+	}
+
 }

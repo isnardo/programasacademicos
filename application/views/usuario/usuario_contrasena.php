@@ -9,49 +9,18 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Perfil de usuario</h1>
+        <h1 class="page-header">Cambiar contraseña</h1>
 
         <div class="row">
          <div class="col-lg-6">
+           <div class="alert alert-danger alert-dismissable" id="errorAlert" style="display:none;">
+             <b>Error al actualizar la contraseña.</b>
+           </div>
+           <div class="alert alert-success alert-dismissable" id="successAlert" style="display:none;">
+             <b>Se actualizó correctamente la contraseña.</b>
+           </div>
 
-            <form role="form" id="form-data">
-            <div id="panel-form-data" class="panel panel-info">
-                 <div class="panel-heading">
-                     Datos de acceso
-                 </div>
-                 <div class="panel-body">
-                     <div class="form-group">
-                       <label for="disabledSelect">Nombre de acceso</label>
-                      <input class="form-control" id="username" type="text" value="<?=$name?>"
-                      placeholder="Nombre de acceso" disabled required>
-                    </div>
-                    <div class="form-group">
-                       <label for="disabledSelect">Correo electrónico</label>
-                      <input class="form-control" id="email" type="text" value="<?=$email?>"
-                      placeholder="Correo electrónico" disabled required>
-                    </div>
-                    <div class="form-group">
-                      <label>Foto de perfil </label></br>
-                      <img src="<?=$this->main->user_photo();?>" alt="" class="img-circle" width="90" height="90">
-                      <input type="file" disabled >
-                    </div>
-                    <button type="button" class="btn btn-outline btn-primary" disabled>
-                      Actualizar
-                    </button>
-                </div>
-                <!-- /.panel-body -->
-                <div class="panel-footer">
-                  <div class="checkbox">
-                    <label><input type="checkbox" value="" id="form-data-checkbox"> Modificar </label>
-                  </div>
-                </div>
-            </div>
-            <!-- /.panel -->
-          </form>
-          <!-- /.form -->
-
-
-          <form role="form" id="form-password">
+         <form id="form-password" role="form" method="POST" action="<?=site_url('usuario/modificar_contrasena');?>">
           <div id="panel-form-password" class="panel panel-info">
             <div class="panel-heading">
               Contraseña
@@ -59,33 +28,36 @@
             <div class="panel-body">
               <div class="form-group">
                 <label for="disabledSelect">Contraseña actual</label>
-                <input class="form-control" id="password_current" type="password" value=""
+                <input class="form-control" id="current-pass" name="current-pass" type="password" value=""
                 placeholder="Contraseña actual" disabled required>
               </div>
               <div class="form-group">
                 <label for="disabledSelect">Nueva contraseña</label>
-                <input class="form-control" id="password_new" type="password" value=""
+                <input class="form-control" id="new-pass" name="new-pass" type="password" value=""
                 placeholder="Nueva contraseña"  disabled required>
               </div>
               <div class="form-group">
                 <label for="disabledSelect">Repetir nueva contraseña</label>
-                <input class="form-control" id="password_new2" type="password" value=""
+                <input class="form-control" id="new2-pass" name="new2-pass" type="password" value=""
                 placeholder="Repetir nueva contraseña"  disabled required>
               </div>
-              <button type="button" class="btn btn-outline btn-primary" disabled>
+              <button id="pass-btn-update" type="button" class="btn btn-outline btn-primary" disabled>
                 Actualizar
               </button>
+              <input type="hidden" value="<?=$uid?>" name="uid">
             </div>
             <!--./panel-body-->
             <div class="panel-footer">
               <div class="checkbox">
-              <label><input type="checkbox" value=""> Modificar </label>
+              <label><input type="checkbox" value="">  Modificar</label>
               </div>
             </div>
           </div>
           <!--./panel-->
           </form>
           <!--./form-->
+
+
 
          </div>
         <!-- /.col-lg-6 -->
@@ -95,7 +67,7 @@
 
            <div class="panel panel-default">
                <div class="panel-heading">
-                   Datos institucionales
+                   Datos del Usuario
                </div>
                <div class="panel-body">
                            <form role="form">

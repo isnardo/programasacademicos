@@ -30,5 +30,5 @@
 		<link href="<?=base_url('assets/jquery-ui/jquery-ui.css');?>" rel="stylesheet" type="text/css">
 		<link href="<?=base_url('assets/jquery-ui/jquery-ui.theme.css');?>" rel="stylesheet" type="text/css">
 		<link href="<?=base_url('assets/jquery-ui/jquery-ui.structure.css');?>" rel="stylesheet" type="text/css">
-		
+
 </head>

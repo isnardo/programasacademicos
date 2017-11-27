@@ -10,7 +10,7 @@ class User_model extends CI_Model {
 		$this->load->database('sac_fc');
 	}
 
-	//return user's password if user exists
+	//return user's password given AccessName if user exists
 	public function return_password( $user )
 	{
     //Clean variable for input
@@ -33,6 +33,41 @@ class User_model extends CI_Model {
 		return $pass;
 	}
 
+	//return user's password given ID if user exists
+	public function return_password_id( $id )
+	{
+    //Clean variable for input
+    $user = $this->main->prepare_sql_input( $id );
+    //Prepare sql query
+    $query =
+    ' SELECT  UsuarioPassword FROM Usuario
+      WHERE 	UsuarioId= ?
+      LIMIT 	1
+    ';
+    //Execute query with security scape variables
+		$result = $this->db->query( $query,array($user) );
+		//Check if user exists and return pass or false
+		if( $result->num_rows() > 0 ){
+			$pass = $result->row()->UsuarioPassword;
+		}
+		else {
+			$pass = false;
+		}
+		return $pass;
+	}
+
+	public function update_password( $data ){
+		$query =
+		'UPDATE Usuario
+		SET UsuarioPassword = ?
+		WHERE UsuarioId = ?
+		';
+
+		$result = $this->db->query( $query,$data );
+
+		return $result;
+	}
+
 	//return all user data contained in tables user and userData
 	public function return_user_fulldata( $user ){
     //Clean variable for input
@@ -40,12 +75,19 @@ class User_model extends CI_Model {
     //Prepare sql query
     $query =
     ' SELECT t1.*,
-						 t2.NivelUsuNombre,t3.TipoUsuNombre
+						 t2.NivelUsuNombre,
+						 t3.TipoUsuNombre,
+						 t4.FacultadNombre,
+						 t5.LicenciaturaNombre
 			FROM Usuario AS t1
 			LEFT JOIN NivelUsuario as t2
 			ON t1.NivelUsuId = t2.NivelUsuId
 			LEFT JOIN TipoUsuario as t3
 			ON t1.TipoUsuId = t3.TipoUsuId
+			LEFT JOIN Facultad as t4
+			ON t1.FacultadId = t4.FacultadId
+			LEFT JOIN Licenciatura as t5
+			ON t1.LicenciaturaId = t5.LicenciaturaId
       WHERE 	t1.UsuarioAcceso = ?
       LIMIT 1
     ';
@@ -182,6 +224,8 @@ class User_model extends CI_Model {
 			1
 		);
 
-		return $this->db->query( $query,$values );
+		$result = $this->db->query( $query,$values );
+
+		return $this->db->insert_id();
 	}
 }

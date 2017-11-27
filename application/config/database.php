@@ -98,8 +98,14 @@ $db['default'] = array(
 $db['sac_fc'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+	//-- hostinger--//
+	//'username' => 'u243137412_usac',
+	//-- my_personal_servers--//
 	'username' => 'user_sac',
 	'password' => 'SAC_FC_2017',
+	//-- hostinger--//
+	//'database' => u243137412_sac
+	//-- my_personal_servers--//
 	'database' => 'sacuaslp',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
