@@ -28,7 +28,7 @@ CREATE TABLE `Apartado` (
   `ApartadoNombre` varchar(50) NOT NULL,
   PRIMARY KEY (`ApartadoId`),
   UNIQUE KEY `ApartadoLetra_UNIQUE` (`ApartadoLetra`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `Bibliografia` (
   KEY `fk_Bibliografia_2_idx` (`ProgAcademicoId`),
   CONSTRAINT `fk_Bibliografia_1` FOREIGN KEY (`BiblioTipoId`) REFERENCES `BibliografiaTipo` (`BiblioTipoId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Bibliografia_2` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `BibliografiaTipo` (
   `BiblioTipoNombre` varchar(50) NOT NULL,
   `BiblioTipoNombres` varchar(50) NOT NULL,
   PRIMARY KEY (`BiblioTipoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `CompProfesional` (
   PRIMARY KEY (`CompProfId`),
   KEY `fk_CompProfesional_1_idx` (`LicenciaturaId`),
   CONSTRAINT `fk_CompProfesional_1` FOREIGN KEY (`LicenciaturaId`) REFERENCES `Licenciatura` (`LicenciaturaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `CompTransversal` (
   `CompTransvNombre` varchar(50) NOT NULL,
   `CompTransvDescripcion` text NOT NULL,
   PRIMARY KEY (`CompTransvId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `Criterio` (
   `CriterioNombre` varchar(100) NOT NULL,
   `CriterioDescripcion` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`CriterioId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `Error` (
   PRIMARY KEY (`ErrorId`),
   KEY `fk_Error_1_idx` (`UsuarioId`),
   CONSTRAINT `fk_Error_1` FOREIGN KEY (`UsuarioId`) REFERENCES `Usuario` (`UsuarioId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='Tabla para almacenar el reporte de errores en el sistema por parte de los usuarios';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla para almacenar el reporte de errores en el sistema por parte de los usuarios';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +187,7 @@ CREATE TABLE `EstadoModificacion` (
   `EstdModifId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `EstdModifNombre` varchar(30) NOT NULL,
   PRIMARY KEY (`EstdModifId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `EstrategiaEnsenanza` (
   PRIMARY KEY (`EstEnsenanzaId`),
   KEY `fk_EstrategiaEsenanza_1_idx` (`ProgAcademicoId`),
   CONSTRAINT `fk_EstrategiaEsenanza_1` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +243,7 @@ CREATE TABLE `Evaluacion` (
   PRIMARY KEY (`EvaluacionId`),
   KEY `fk_Evaluacion_1_idx` (`ProgAcademicoId`),
   CONSTRAINT `fk_Evaluacion_1` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,7 +261,7 @@ CREATE TABLE `Facultad` (
   `FacultadTel` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`FacultadId`),
   UNIQUE KEY `FacultadNombre_UNIQUE` (`FacultadNombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +298,7 @@ CREATE TABLE `Licenciatura` (
   UNIQUE KEY `LicenciaturaNombre_UNIQUE` (`LicenciaturaNombre`),
   KEY `fk_Licenciatura_1_idx` (`FacultadId`),
   CONSTRAINT `fk_Licenciatura_1` FOREIGN KEY (`FacultadId`) REFERENCES `Facultad` (`FacultadId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,7 +316,7 @@ CREATE TABLE `LineaConocimiento` (
   PRIMARY KEY (`LineaId`),
   KEY `fk_LineaConocimiento_1_idx` (`LicenciaturaId`),
   CONSTRAINT `fk_LineaConocimiento_1` FOREIGN KEY (`LicenciaturaId`) REFERENCES `Licenciatura` (`LicenciaturaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +337,7 @@ CREATE TABLE `Materia` (
   KEY `fk_Materia_2_idx` (`LineaId`),
   CONSTRAINT `fk_Materia_1` FOREIGN KEY (`LicenciaturaId`) REFERENCES `Licenciatura` (`LicenciaturaId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Materia_2` FOREIGN KEY (`LineaId`) REFERENCES `LineaConocimiento` (`LineaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +437,7 @@ CREATE TABLE `Modificacion` (
   CONSTRAINT `fk_Modificacion_3` FOREIGN KEY (`EstdModifId`) REFERENCES `EstadoModificacion` (`EstdModifId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Modificacion_4` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Modificacion_5` FOREIGN KEY (`CriterioId`) REFERENCES `Criterio` (`CriterioId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,8 +452,18 @@ CREATE TABLE `NivelUsuario` (
   `NivelUsuNombre` varchar(50) NOT NULL,
   `NivelUsuPrivilegios` tinytext NOT NULL,
   PRIMARY KEY (`NivelUsuId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NivelUsuario`
+--
+
+LOCK TABLES `NivelUsuario` WRITE;
+/*!40000 ALTER TABLE `NivelUsuario` DISABLE KEYS */;
+INSERT INTO `NivelUsuario` (`NivelUsuId`, `NivelUsuNombre`, `NivelUsuPrivilegios`) VALUES (NULL, 'Visitante', ''), (NULL, 'Revisor', ''), (NULL, 'Supervisor', ''), (NULL, 'Administrador', ''), (NULL, 'Super Administrador', '');
+/*!40000 ALTER TABLE `NivelUsuario` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ProgAcademicoCompProf`
@@ -472,7 +482,7 @@ CREATE TABLE `ProgAcademicoCompProf` (
   KEY `fk_ProgAcademicoCompProf_2_idx` (`CompProfId`),
   CONSTRAINT `fk_ProgAcademicoCompProf_1` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ProgAcademicoCompProf_2` FOREIGN KEY (`CompProfId`) REFERENCES `CompProfesional` (`CompProfId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +502,7 @@ CREATE TABLE `ProgAcademicoCompTransv` (
   KEY `fk_ProgAcademicoCompTransv_2_idx` (`ProgAcademicoId`),
   CONSTRAINT `fk_ProgAcademicoCompTransv_1` FOREIGN KEY (`CompTransvId`) REFERENCES `CompTransversal` (`CompTransvId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ProgAcademicoCompTransv_2` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,7 +533,7 @@ CREATE TABLE `ProgramaAcademico` (
   CONSTRAINT `fk_ProgramaAcademico_1` FOREIGN KEY (`MateriaId`) REFERENCES `Materia` (`MateriaId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ProgramaAcademico_2` FOREIGN KEY (`TipoMateriaId`) REFERENCES `TipoMateria` (`TipoMateriaId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ProgramaAcademico_3` FOREIGN KEY (`TipoPropCurrId`) REFERENCES `TipoPropuestaCurricular` (`TipoPropCurrId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,7 +570,7 @@ CREATE TABLE `Subtema` (
   PRIMARY KEY (`SubtemaId`),
   KEY `fk_Subtema_1_idx` (`TemaId`),
   CONSTRAINT `fk_Subtema_1` FOREIGN KEY (`TemaId`) REFERENCES `Tema` (`TemaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +589,7 @@ CREATE TABLE `Tema` (
   PRIMARY KEY (`TemaId`),
   KEY `fk_Tema_1_idx` (`UnidadId`),
   CONSTRAINT `fk_Tema_1` FOREIGN KEY (`UnidadId`) REFERENCES `Unidad` (`UnidadId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -593,7 +603,7 @@ CREATE TABLE `TipoMateria` (
   `TipoMateriaId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `TipoMateriaNombre` varchar(50) NOT NULL,
   PRIMARY KEY (`TipoMateriaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -607,7 +617,7 @@ CREATE TABLE `TipoPropuestaCurricular` (
   `TipoPropCurrId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `TipoPropCurrNombre` varchar(30) NOT NULL,
   PRIMARY KEY (`TipoPropCurrId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -621,7 +631,7 @@ CREATE TABLE `TipoUsuario` (
   `TipoUsuId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `TipoUsuNombre` varchar(50) NOT NULL,
   PRIMARY KEY (`TipoUsuId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -641,7 +651,7 @@ CREATE TABLE `Unidad` (
   PRIMARY KEY (`UnidadId`),
   KEY `fk_Unidad_1_idx` (`ProgAcademicoId`),
   CONSTRAINT `fk_Unidad_1` FOREIGN KEY (`ProgAcademicoId`) REFERENCES `ProgramaAcademico` (`ProgAcademicoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -672,8 +682,21 @@ CREATE TABLE `Usuario` (
   CONSTRAINT `fk_Usuario_1` FOREIGN KEY (`NivelUsuId`) REFERENCES `NivelUsuario` (`NivelUsuId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_2` FOREIGN KEY (`TipoUsuId`) REFERENCES `TipoUsuario` (`TipoUsuId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_3` FOREIGN KEY (`FacultadId`) REFERENCES `Facultad` (`FacultadId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Usuario`
+--
+
+LOCK TABLES `Usuario` WRITE;
+/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+INSERT INTO `Usuario` (`UsuarioId`, `UsuarioAcceso`, `UsuarioPassword`, `UsuarioFoto`, `UsuarioEmail`, `NivelUsuId`, `TipoUsuId`, `UsuarioNombre`, `UsuarioApellidos`, `FacultadId`, `LicenciaturaId`) VALUES (NULL, 'admin', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', NULL, 'isnardo.rr@gmail.com', '5', NULL, 'Administrador', 'del Sistema', NULL, NULL);
+/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -684,4 +707,4 @@ CREATE TABLE `Usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11  0:45:47
+-- Dump completed on 2017-12-11  1:10:23

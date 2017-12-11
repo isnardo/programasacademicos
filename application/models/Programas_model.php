@@ -38,6 +38,26 @@ class Programas_model extends CI_Model {
 		return $data;
 	}
 
+	public function return_lic_name( $id ){
+		$query =
+    ' SELECT t1.LicenciaturaNombre
+		FROM Licenciatura AS t1
+		WHERE t1.LicenciaturaId = ?
+		';
+
+		//Execute query with security scape variables
+		$result = $this->db->query( $query,array($id) );
+		//Check if user exists and return data
+		if( $result->num_rows() > 0 ){
+			$data = $result->row()->LicenciaturaNombre;
+		}
+		else {
+			$data = false;
+		}
+
+		return $data;
+	}
+
 	public function return_datos_basicos( $id ){
 		// Clean input
 		$id = $this->main->prepare_sql_input( $id );

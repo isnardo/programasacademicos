@@ -19,18 +19,7 @@
 
   <div class="row">
       <div class="col-lg-12">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                  Lista de programas académicos
-              </div>
-              <!-- /.panel-heading -->
-              <div class="panel-body">
-                <!-- Render Programs List -->
-                <?=$lista;?>
-              </div>
-              <!-- /.panel-body -->
-          </div>
-          <!-- /.panel -->
+        <?=$lista;?>
       </div>
       <!-- /.col-lg-12 -->
 

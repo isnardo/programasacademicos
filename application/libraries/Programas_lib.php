@@ -13,14 +13,23 @@ class Programas_lib{
     $CI->load->model('programas_model');
 
     $list = $CI->programas_model->return_list( $lic_id );
+    $name = $CI->programas_model->return_lic_name( $lic_id );
 
-    $html = '<table width="100%" class="table table-striped table-bordered">
-             <thead><tr>
+
+    $html = '<div class="panel panel-default">
+             <div class="panel-heading">';
+    $html = $html.$name;
+    $html = $html.'</div>
+            <div class="panel-body">
+            <table width="100%" class="table table-striped table-bordered">
+             <thead>
+              <tr>
                <th width="10%">Clave</th>
                <th>Nombre</th>
                <th width="10%">Versión</th>
                <th width="10%"></th>
-             </tr></thead>
+              </tr>
+              </thead>
              <tbody>';
 
     if( $list && $list->num_rows() > 0 ){
@@ -43,7 +52,8 @@ class Programas_lib{
         $html = $html."<tr>".$item."</tr>";
       }
     }
-    $html = $html.'</tbody></table>';
+    $html = $html.'</tbody></table>
+            </div></div>';
     return $html;
   }
 
