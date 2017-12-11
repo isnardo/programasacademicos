@@ -12,130 +12,80 @@
         <h1 class="page-header">Nuevo usuario</h1>
 
         <div class="row">
-         <div class="col-lg-6">
+
+         <div class="col-lg-8">
 
             <form role="form" id="form-data">
             <div id="panel-form-data" class="panel panel-info">
                  <div class="panel-heading">
-                     Datos de acceso
+                     Datos del nuevo usuario
                  </div>
                  <div class="panel-body">
+
+                   <div class="form-group">
+                       <label for="disabledSelect">Nombre</label>
+                       <input class="form-control" type="text"
+                       placeholder="Nombre">
+                   </div>
+                   <div class="form-group">
+                       <label for="disabledSelect">Apellidos</label>
+                       <input class="form-control" type="text"
+                       placeholder="Apellidos">
+                   </div>
+                   <div class="form-group">
+                       <label for="disabledSelect">Tipo de usuario</label>
+                       <?=$niveles;?>
+                   </div>
+                   <div class="form-group">
+                       <label for="disabledSelect">Facultad</label>
+                       <?=$facultades;?>
+                   </div>
+                   <div class="form-group">
+                       <label for="disabledSelect">Licenciatura</label>
+                       <input class="form-control" type="text" disabled
+                       placeholder="Licenciatura">
+                   </div>
+
+                   <div class="form-group">
+                      <label for="disabledSelect">Correo electrónico</label>
+                     <input class="form-control" id="email" type="text" placeholder="Correo electrónico" required>
+                   </div>
+
                      <div class="form-group">
                        <label for="disabledSelect">Nombre de acceso</label>
-                      <input class="form-control" id="username" type="text" value="<?=$this->session->userdata['name']?>"
-                      placeholder="Nombre de acceso" disabled required>
+                      <input class="form-control" id="username" type="text" placeholder="Nombre de acceso" required>
                     </div>
-                    <div class="form-group">
-                       <label for="disabledSelect">Correo electrónico</label>
-                      <input class="form-control" id="email" type="text" value="<?=$this->session->userdata['email']?>"
-                      placeholder="Correo electrónico" disabled required>
-                    </div>
-                    <div class="form-group">
-                      <label>Foto de perfil </label></br>
-                      <img src="<?=$this->main->user_photo('user_default.png');?>" alt="" class="img-circle" width="90" height="90">
-                      <input type="file" disabled >
-                    </div>
-                    <button type="button" class="btn btn-outline btn-primary" disabled>
-                      Actualizar
-                    </button>
-                </div>
-                <!-- /.panel-body -->
-                <div class="panel-footer">
-                  <div class="checkbox">
-                    <label><input type="checkbox" value="" id="form-data-checkbox"> Modificar </label>
-                  </div>
-                </div>
-            </div>
-            <!-- /.panel -->
-          </form>
-          <!-- /.form -->
 
 
-          <form role="form" id="form-password">
-          <div id="panel-form-password" class="panel panel-info">
-            <div class="panel-heading">
-              Contraseña
-            </div>
-            <div class="panel-body">
               <div class="form-group">
-                <label for="disabledSelect">Contraseña actual</label>
-                <input class="form-control" id="password_current" type="password" value=""
-                placeholder="Contraseña actual" disabled required>
+                <label for="disabledSelect">Contraseña</label>
+                <input class="form-control" id="password_1" type="password"
+                placeholder="Contraseña"  required>
               </div>
               <div class="form-group">
-                <label for="disabledSelect">Nueva contraseña</label>
-                <input class="form-control" id="password_new" type="password" value=""
-                placeholder="Nueva contraseña"  disabled required>
+                <label for="disabledSelect">Repetir contraseña</label>
+                <input class="form-control" id="password_2" type="password"
+                placeholder="Repetir contraseña"  required>
               </div>
               <div class="form-group">
-                <label for="disabledSelect">Repetir nueva contraseña</label>
-                <input class="form-control" id="password_new2" type="password" value=""
-                placeholder="Repetir nueva contraseña"  disabled required>
+                <label>Foto de perfil </label></br>
+                <img src="<?=$this->main->user_photo('user_default.png');?>" alt="" class="img-circle" width="90" height="90">
+                <input type="file" disabled >
               </div>
-              <button type="button" class="btn btn-outline btn-primary" disabled>
-                Actualizar
+              <button type="button" class="btn btn-outline btn-primary" >
+                Crear
               </button>
             </div>
             <!--./panel-body-->
-            <div class="panel-footer">
-              <div class="checkbox">
-              <label><input type="checkbox" value=""> Modificar </label>
-              </div>
-            </div>
+
           </div>
           <!--./panel-->
           </form>
           <!--./form-->
 
          </div>
-        <!-- /.col-lg-6 -->
+        <!-- /.col-lg-8 -->
 
-
-       <div class="col-lg-6">
-
-           <div class="panel panel-default">
-               <div class="panel-heading">
-                   Datos personales
-               </div>
-               <div class="panel-body">
-                           <form role="form">
-                             <!-- Elemts that can't modified -->
-                             <fieldset disabled>
-                                 <div class="form-group">
-                                     <label for="disabledSelect">Nombre</label>
-                                     <input class="form-control" type="text" value="<?=$this->session->userdata['firstName']?>"
-                                     placeholder="Nombre" disabled>
-                                 </div>
-                                 <div class="form-group">
-                                     <label for="disabledSelect">Apellidos</label>
-                                     <input class="form-control" type="text" value="<?=$this->session->userdata['lastName']?>"
-                                     placeholder="Apellidos" disabled>
-                                 </div>
-                                 <div class="form-group">
-                                     <label for="disabledSelect">Tipo de usuario</label>
-                                     <input class="form-control" type="text" value="<?=$this->session->userdata['level']?>"
-                                     placeholder="Usuario" disabled>
-                                 </div>
-                                 <div class="form-group">
-                                     <label for="disabledSelect">Facultad</label>
-                                     <input class="form-control" type="text" value="..."
-                                     placehokder="Facultad" disabled>
-                                 </div>
-                                 <div class="form-group">
-                                     <label for="disabledSelect">Licenciatura</label>
-                                     <input class="form-control" type="text" value="..."
-                                     placeholder="Licenciatura" disabled>
-                                 </div>
-                            </fieldset>
-                            <!-- ./ Elemts that can't modified -->
-                          </form>
-                          <!-- /.form -->
-                </div>
-               <!-- /.panel-body -->
-           </div>
-           <!-- /.panel -->
-       </div>
-       <!-- /.col-lg-6 -->
 
 
         </div>

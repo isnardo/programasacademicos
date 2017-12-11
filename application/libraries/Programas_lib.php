@@ -10,10 +10,12 @@ class Programas_lib{
   public function render_lista( $lic_id ){
     // Load Model to execute SQL queryes
     $CI =& get_instance();
-    $CI->load->model('programas_model');
 
+    $CI->load->model('programas_model');
     $list = $CI->programas_model->return_list( $lic_id );
-    $name = $CI->programas_model->return_lic_name( $lic_id );
+
+    $CI->load->model('universidad_model');
+    $name = $CI->universidad_model->return_lic_name( $lic_id );
 
 
     $html = '<div class="panel panel-default">

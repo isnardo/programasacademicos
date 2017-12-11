@@ -48,10 +48,21 @@ class Usuario extends CI_Controller {
 	public function nuevo(){
 		$this->validate_session();
 
+		$this->load->model('universidad_model');
+
+		$data['facultades'] = $this->main->render_select(
+			$this->universidad_model->return_facultades()
+			,'facultad');
+
+		$data['niveles'] = $this->main->render_select(
+	 		$this->universidad_model->return_niveles_acceso()
+	 		,'nivel');
+
 		$this->load->view('usuario/usuario_header');
-		$this->load->view('usuario/usuario_nuevo');
+		$this->load->view('usuario/usuario_nuevo',$data);
 		$this->load->view('usuario/usuario_footer');
 	}
+
 
 	// Comentarios para los usuarios
 	public function comentarios(){
