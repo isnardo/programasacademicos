@@ -56,14 +56,14 @@ class Usuario extends CI_Controller {
 	// Comentarios para los usuarios
 	public function comentarios(){
 		$this->validate_session();
-		$this->load->library( 'user',array('id' => $this->session->userdata['id']) );
+		$this->load->library( 'Usuario_lib',array('id' => $this->session->userdata['id']) );
 
 		// Render User Menu
 		$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
 		// tipo <- tipo de comentarios recibido por metodo GET
 		$data['tipo'] = $this->input->get('tipo');
 		// n <- número de comentarios que se recibe por método GET
-		$data['comentarios'] = $this->user->render_comentarios( $this->input->get('n') );
+		$data['comentarios'] = $this->usuario_lib->render_comentarios( $this->input->get('n') );
 		$data['error'] = $this->main->render_error_dialog();
 
 		$this->load->view('usuario/usuario_header');
@@ -75,14 +75,14 @@ class Usuario extends CI_Controller {
 	public function contrasena(){
 		$this->validate_session();
 
-		$this->load->model('user_model');
+		$this->load->model('usuario_model');
 
 		$data['error'] = $this->main->render_error_dialog();
 		$data['firstName'] = $this->session->userdata['firstName'];
 		$data['lastName'] = $this->session->userdata['lastName'];
 		$data['level'] = $this->session->userdata['level'];
-		$data['facultad'] = $this->session->userdata['facultad'];
-		$data['licenciatura'] = $this->session->userdata['licenciatura'];
+		$data['facultad'] = $this->session->userdata['fac_name'];
+		$data['licenciatura'] = $this->session->userdata['lic_name'];
 		$data['uid'] = $this->session->userdata['id'];
 
 
@@ -95,10 +95,10 @@ class Usuario extends CI_Controller {
 	public function modificar_contrasena(){
 		$this->validate_session();
 
-		$this->load->model('user_model');
+		$this->load->model('usuario_model');
 		$user = intval( $this->input->post('uid') );
 
-		$pass = $this->user_model->return_password_id( $user );
+		$pass = $this->usuario_model->return_password_id( $user );
 
 		if( $pass && $pass === hash('sha256',$this->input->post('current-pass')) ){
 			$new_pass = hash('sha256',$this->input->post('new-pass'));
@@ -106,7 +106,7 @@ class Usuario extends CI_Controller {
 			$data['UsuarioPassword'] = $new_pass;
 			$data['UsusarioId'] = $user;
 
-			$result = $this->user_model->update_password( $data );
+			$result = $this->usuario_model->update_password( $data );
 
 			$msg = 'Se actualizó correctamente la contraseña.';
 			$success = true;
@@ -129,12 +129,12 @@ class Usuario extends CI_Controller {
 	public function error(){
 		$this->validate_session();
 
-		$this->load->model('user_model');
+		$this->load->model('usuario_model');
 
 		$data['user'] = $this->session->userdata('id');
 		$data['error'] = $this->input->post('error');
 
-		$folio = $this->user_model->save_error( $data );
+		$folio = $this->usuario_model->save_error( $data );
 
 		if( $folio ){
 			$msg = '¡El error fue reportado exitosamente! Número de folio: '.$folio;

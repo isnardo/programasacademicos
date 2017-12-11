@@ -12,11 +12,6 @@ class Main{
   public function __construct(){
   }
 
-  //Launch controller
-  public function controller( $controller ){
-      return base_url('index.php/'.$controller);
-  }
-
   //Return complete url of global image
   public function image( $image ){
       return base_url('main/images/'.$image);
@@ -79,48 +74,13 @@ class Main{
     return $output;
   }
 
-  //render programs list with a given list of mysq_li result
-  public function render_lista_programas( $list ){
-    $html = '<table width="100%" class="table table-striped table-bordered">
-             <thead><tr>
-               <th width="10%">Clave</th>
-               <th>Nombre</th>
-               <th width="10%">Versión</th>
-               <th width="10%"></th>
-             </tr></thead>
-             <tbody>';
-
-    if( $list && $list->num_rows() > 0 ){
-      foreach ( $list->result() as $row ){
-        //render item
-        $item =       '<td>'.$row->ProgAcademicoId.'</td>';
-        $item = $item.'<td>'.$row->MateriaNombre.'</td>';
-        $item = $item.'<td>'.$row->ProgAcademicoVersion.'</td>';
-        $item = $item.'<td><button type="button" id="btn-del-compTransv"';
-        $item = $item.'class="btn btn-primary btn-block" ';
-        $item = $item.'onClick="goto_program(';
-        $item = $item."'";
-        $item = $item.$this->controller('programas/ver');
-        $item = $item."','";
-        $item = $item.$row->ProgAcademicoId."'";
-        $item = $item.')">';
-        $item = $item.'Ver</button></td>';
-
-        //concatenate items
-        $html = $html."<tr>".$item."</tr>";
-      }
-    }
-    $html = $html.'</tbody></table>';
-    return $html;
-  }
-
   public function render_error_dialog(){
     $ci =& get_instance();
     $ci->load->library('main');
 
     $html = '<div id="error-dialog" title="Reportar Error">';
     $html = $html.'<form role="form" id="error-form" action="';
-    $html = $html.$ci->main->controller('usuario/error');
+    $html = $html.site_url('usuario/error');
     $html = $html.'" method="POST">';
     $html = $html.
     '<div class="form-group">

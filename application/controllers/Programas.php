@@ -24,99 +24,99 @@ class Programas extends CI_Controller {
 		parent::__construct();
 	}
 
+	// Check start session
+	private function validate_session(){
+		if( !$this->session->userdata('login') ){
+			header( "Location: ".base_url() );
+		}
+	}
+
 	// Display Login Page
 	public function index()	{
 		header( "Location: ".base_url('index.php/inicio') );
 	}
 
 	public function nuevo(){
-		if( $this->session->userdata('login') ){
-			$this->load->view('programas/programas_nuevo_header');
-			$this->load->view('programas/programas_nuevo');
-			$this->load->view('programas/programas_nuevo_footer');
-		}else{
-			header( "Location: ".base_url() );
-		}
+		$this->validate_session();
+
+		$this->load->view('programas/programas_nuevo_header');
+		$this->load->view('programas/programas_nuevo');
+		$this->load->view('programas/programas_nuevo_footer');
 	}
 
 	//Muestra la lista de los programas académicos para una licenciatura indicada
-	public function lista( ){
-		if( $this->session->userdata('login') ){
+	public function lista( $lic_id = NULL ){
+		$this->validate_session();
 
-			$this->load->model('programas_model');
-
-			$lista = $this->programas_model->return_list( 1 );
-
-			$data['menu']  = $this->menu->render_user_menu( $this->session->userdata['menu'] );
-			$data['lista'] = $this->main->render_lista_programas($lista);
-			$data['error'] = $this->main->render_error_dialog();
-
-			$this->load->view('programas/programas_lista_header');
-			$this->load->view('programas/programas_lista',$data);
-			$this->load->view('programas/programas_lista_footer');
-		}else{
-			header( "Location: ".base_url() );
+		if( !$lic_id ){
+			$lic_id = $this->session->userdata('lic_id');
 		}
+
+		$this->load->library('programas_lib');
+
+		$data['menu']  = $this->menu->render_user_menu( $this->session->userdata['menu'] );
+		$data['lista'] = $this->programas_lib->render_lista( $lic_id  );
+		$data['error'] = $this->main->render_error_dialog();
+
+		$this->load->view('programas/programas_lista_header');
+		$this->load->view('programas/programas_lista',$data);
+		$this->load->view('programas/programas_lista_footer');
+
 	}
 
 	public function ver( ){
-		if( $this->session->userdata('login') ){
-			// ID del programa a mostrar
-			if( $this->input->server('REQUEST_METHOD') == 'GET'){
-				$id = $this->input->get('programa');
-			}else{
-				$id = $this->input->post('programa');
-			}
-			// Load library programa
-			$this->load->library( 'programa',array('id' => $id) );
+		$this->validate_session();
 
-			$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
-			$data['error'] = $this->main->render_error_dialog();
-
-			// Generamos el HTML de los elementos del programa
-			$data['licenciatura'] = $this->programa->licenciatura();
-			// Nombre en Mayusculas
-			$data['programa_id'] = $id;
-			$data['usuario'] = $this->session->userdata['id'];
-			$data['programa'] = $this->programa->render();
-			$data['comentarios'] = $this->programa->render_comentarios();
-			$data['numero_comentarios'] = $this->programa->get_num_commentarios();
-
-			$data['url_nuevo_comentario'] = site_url('programas/nuevocomentario');
-			$data['img_loading'] = $this->main->image('loading.gif');
-
-			// Cargamos la vista
-			$this->load->view('programas/programas_ver_header');
-			$this->load->view('programas/programas_ver',$data);
-			$this->load->view('programas/programas_ver_footer');
+		// ID del programa a mostrar
+		if( $this->input->server('REQUEST_METHOD') == 'GET'){
+			$id = $this->input->get('programa');
 		}else{
-			header( "Location: ".base_url() );
+			$id = $this->input->post('programa');
 		}
+		// Load library programa
+		$this->load->library( 'programa',array('id' => $id) );
+
+		$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
+		$data['error'] = $this->main->render_error_dialog();
+
+		// Generamos el HTML de los elementos del programa
+		$data['licenciatura'] = $this->programa->licenciatura();
+		// Nombre en Mayusculas
+		$data['programa_id'] = $id;
+		$data['usuario'] = $this->session->userdata['id'];
+		$data['programa'] = $this->programa->render();
+		$data['comentarios'] = $this->programa->render_comentarios();
+		$data['numero_comentarios'] = $this->programa->get_num_commentarios();
+
+		$data['url_nuevo_comentario'] = site_url('programas/nuevocomentario');
+		$data['img_loading'] = $this->main->image('loading.gif');
+
+		// Cargamos la vista
+		$this->load->view('programas/programas_ver_header');
+		$this->load->view('programas/programas_ver',$data);
+		$this->load->view('programas/programas_ver_footer');
 	}
 
 	public function nuevocomentario(){
-		if( $this->session->userdata('login') ){
-			$this->load->model('programas_model');
-			$this->load->library('programa');
+		$this->validate_session();
 
-			$id_comment = $this->programas_model->nuevo_comentario( $this->input->post() );
-			$comment = $this->programas_model->return_comentario( $id_comment );
-			$dialog_id = intval( $this->input->post( 'comments' ) );
-			$html = $this->programa->render_comentario( $comment,$dialog_id );
+		$this->load->model('programas_model');
+		$this->load->library('programa');
 
-			$json = array(
-				'html'		=> $html,
-				'dialog'	=> '#dialog-modif-'.$dialog_id,
-				'n'				=> $dialog_id + 1
-			);
+		$id_comment = $this->programas_model->nuevo_comentario( $this->input->post() );
+		$comment = $this->programas_model->return_comentario( $id_comment );
+		$dialog_id = intval( $this->input->post( 'comments' ) );
+		$html = $this->programa->render_comentario( $comment,$dialog_id );
 
-	 		$out = json_encode( $json );
-			header('Content-Type: application/json');
-			echo $out;
-		}
-		else{
-			header( "Location: ".base_url() );
-		}
+		$json = array(
+			'html'		=> $html,
+			'dialog'	=> '#dialog-modif-'.$dialog_id,
+			'n'				=> $dialog_id + 1
+		);
+
+	 	$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
 	}
 
 }

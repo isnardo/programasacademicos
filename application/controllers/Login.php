@@ -26,7 +26,7 @@ class Login extends CI_Controller {
 
 	// Display Login Page
 	public function index()	{
-		$data['form_action'] = $this->main->controller('login/validate_user');
+		$data['form_action'] = site_url('login/validate_user');
 		$data['uaslp_logo'] = $this->main->image('uaslp-logo-fav.png');
 		$data['system_version'] = $this->main->system_version;
 		$data['institution'] = $this->main->institution;
@@ -41,10 +41,10 @@ class Login extends CI_Controller {
 	// Check user and password
 	public function validate_user() {
 		//Load modeL
-		$this->load->model('user_model');
+		$this->load->model('usuario_model');
 
 		//Execute Model to obtain the user's password
-		$pass = $this->user_model->return_password( $this->input->post('user') );
+		$pass = $this->usuario_model->return_password( $this->input->post('user') );
 
 		//check if user exists and verify password
 		if( $pass && $pass === hash('sha256',$this->input->post('password')) ){
@@ -56,7 +56,7 @@ class Login extends CI_Controller {
 		// Output to return JSON variable with boolean data of success
 		$json = array(
 			"success" => $success,
-			"url" 		=> $this->main->controller('login/start')
+			"url" 		=> site_url('login/start')
 		);
  		$out = json_encode( $json );
 		header('Content-Type: application/json');
@@ -66,9 +66,9 @@ class Login extends CI_Controller {
 	// Session start after login user validation
 	public function start(){
 			//Load model
-			$this->load->model('user_model');
+			$this->load->model('usuario_model');
 			//Obtain user data
-			$data = $this->user_model->return_user_fulldata( $this->input->post('user') );
+			$data = $this->usuario_model->return_user_fulldata( $this->input->post('user') );
 
 			// Check data and start or exit session
 			if( $data && hash('sha256',$this->input->post('password')) === $data->UsuarioPassword ){
@@ -82,14 +82,16 @@ class Login extends CI_Controller {
 					'email' 		=> $data->UsuarioEmail,
 					'type'			=> $data->TipoUsuNombre,
 					'type_id'		=> $data->TipoUsuId,
-					'facultad'		=> $data->FacultadNombre,
-					'licenciatura'		=> $data->LicenciaturaNombre,
+					'fac_id'		=> $data->FacultadId,
+					'fac_name'	=> $data->FacultadNombre,
+					'lic_id'		=> $data->LicenciaturaId,
+					'lic_name'	=> $data->LicenciaturaNombre,
 					'photo'			=> $data->UsuarioId.$data->UsuarioFoto,
 					'menu'			=> $this->menu->user_side_menu( $data->NivelUsuId ),
 					'login'			=> true
 				);
 				$this->session->set_userdata( $dataSession );
-				header( "Location: ".$this->main->controller('inicio') );
+				header( "Location: ".site_url('inicio') );
 			}else{
 				header( "Location: ".base_url() );
 			}

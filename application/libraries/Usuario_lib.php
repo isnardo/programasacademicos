@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User{
+class Usuario_lib{
 
   private $id;
   private $nombre;
@@ -33,7 +33,7 @@ class User{
     $html = $html.'<div class="text-muted">';
     $html = $html.'<p><i class="fa fa-clipboard fa-fw"></i> ';
     $html = $html.'<a href="';
-    $html = $html.$ci->main->controller('programas/ver?programa=');
+    $html = $html.site_url('programas/ver?programa=');
     $html = $html.$comment->ProgAcademicoId.'">';
     $html = $html.$comment->MateriaNombre;
     $html = $html.' (Versión: '.$comment->ProgAcademicoVersion.')</a></p>';
@@ -80,9 +80,9 @@ class User{
   public function render_comentarios( $tipo ){
     //Load library
     $ci =& get_instance();
-    $ci->load->model('user_model');
+    $ci->load->model('usuario_model');
 
-    $comentarios = $ci->user_model->return_comentarios( $this->id,$tipo );
+    $comentarios = $ci->usuario_model->return_comentarios( $this->id,$tipo );
 
     $html = '';
     if( $comentarios ){

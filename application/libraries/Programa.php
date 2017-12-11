@@ -16,6 +16,7 @@ class Programa{
   private $numero_comentarios;
 
   public function __construct( $id = false ){
+
     if( $id ){
       // Load Model to execute SQL queryes
       $CI =& get_instance();

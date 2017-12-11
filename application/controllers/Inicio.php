@@ -35,20 +35,19 @@ class Inicio extends CI_Controller {
 	public function index()	{
 		$this->validate_session();
 
-		$this->load->model('programas_model');
-		$this->load->model('user_model');
+		$this->load->library('programas_lib');
+		$this->load->model('usuario_model');
 
-		// Cargar lista de programas academicos disponibles
-		$lista = $this->programas_model->return_list( 1 );
-		$data['lista'] = $this->main->render_lista_programas( $lista );
+		// Cargar lista de programas academicos disponibles para la licenciatura que pertenece
+		$data['lista'] = $this->programas_lib->render_lista( $this->session->userdata('lic_id')  );
 		//Modificaciones sugeridas por el usuario
-		$comments = $this->user_model->cuenta_comentarios( $this->session->userdata('id') );
+		$comments = $this->usuario_model->cuenta_comentarios( $this->session->userdata('id') );
 		$data['pendientes'] = $comments->Pendientes;
-		$data['url_pendientes'] = $this->main->controller('usuario/comentarios?tipo=Pendientes&n=1');
+		$data['url_pendientes'] = site_url('usuario/comentarios?tipo=Pendientes&n=1');
 		$data['aprobadas'] = $comments->Aprobadas;
-		$data['url_aprobadas'] = $this->main->controller('usuario/comentarios?tipo=Aprobadas&n=2');
+		$data['url_aprobadas'] = site_url('usuario/comentarios?tipo=Aprobadas&n=2');
 		$data['rechazadas'] = $comments->Rechazadas;
-		$data['url_rechazadas'] = $this->main->controller('usuario/comentarios?tipo=Rechazadas&n=3');
+		$data['url_rechazadas'] = site_url('usuario/comentarios?tipo=Rechazadas&n=3');
 
 		$data['menu']  = $this->menu->render_user_menu( $this->session->userdata['menu'] );
 		$data['error'] = $this->main->render_error_dialog();

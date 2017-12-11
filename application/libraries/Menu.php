@@ -202,7 +202,7 @@ class Menu{
       $item = $menu[$i];
       // controller
       if(strcmp($item['controller'],'#') !== 0 ){
-        $html = $html.'<li><a href="'.$ci->main->controller($item['controller']).'">';
+        $html = $html.'<li><a href="'.site_url($item['controller']).'">';
       }else{
         $html = $html.'<li><a href="#">';
       }
@@ -220,7 +220,7 @@ class Menu{
           $iitem = $item['submenu_list'][$ii];
           // controller
           if(strcmp($iitem['controller'],'#') !== 0 ){
-            $html = $html.'<li><a href="'.$ci->main->controller($iitem['controller']).'">';
+            $html = $html.'<li><a href="'.site_url($iitem['controller']).'">';
           }else{
             $html = $html.'<li><a href="#">';
           }
@@ -266,7 +266,7 @@ class Menu{
     /*
     // User profile
     $html = $html.'<li><a href="';
-    $html = $html.'#';//$ci->main->controller('usuario/perfil');
+    $html = $html.'#';//site_url('usuario/perfil');
     $html = $html.'"><i class="fa fa-user fa-fw"></i>';
     $html = $html.' Perfil de usuario</a></li>';
     // User configuration
@@ -282,7 +282,7 @@ class Menu{
     $html = $html.'<li class="divider"></li>';
     // Sign out user session
     $html = $html.'<li><a href="';
-    $html = $html.$ci->main->controller('login/stop');
+    $html = $html.site_url('login/stop');
     $html = $html.'"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>';
     // ./top menu
     $html = $html.'</ul></li></ul>';
@@ -303,7 +303,7 @@ class Menu{
     $html = $html.'<span class="icon-bar"></span>';
     $html = $html.'</button>';
     $html = $html.'<a class="navbar-brand" href="';
-    $html = $html.$ci->main->controller('inicio');
+    $html = $html.site_url('inicio');
     $html = $html.'">';
     $html = $html.$ci->main->system_version;
     $html = $html.'</a></div>';
