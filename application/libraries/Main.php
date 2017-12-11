@@ -90,7 +90,7 @@ class Main{
              </tr></thead>
              <tbody>';
 
-    if( $list->num_rows() > 0 ){
+    if( $list && $list->num_rows() > 0 ){
       foreach ( $list->result() as $row ){
         //render item
         $item =       '<td>'.$row->ProgAcademicoId.'</td>';

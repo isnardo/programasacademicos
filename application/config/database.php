@@ -97,16 +97,18 @@ $db['default'] = array(
 
 $db['sac_fc'] = array(
 	'dsn'	=> '',
+	//--LOCALHOST--//
 	'hostname' => 'localhost',
-	//-- hostinger--//
-	//'username' => 'u243137412_usac',
-	//-- my_personal_servers--//
 	'username' => 'user_sac',
 	'password' => 'SAC_FC_2017',
-	//-- hostinger--//
-	//'database' => u243137412_sac
-	//-- my_personal_servers--//
 	'database' => 'sacuaslp',
+	//--HOSTINGER--//
+/*
+	'hostname' => 'mysql.hostinger.es',
+	'username' => 'u243137412_usac',
+	'password' => 'SAC_FC_2017',
+	'database' => 'u243137412_sac',
+*/
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
