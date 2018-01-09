@@ -44,7 +44,7 @@ $(document).ready(function() {
 
   // Action to change user password
   $("#pass-btn-update").on('click', function(){
-    if( $("#new-pass").val() == $("#new2-pass").val() ){
+    if( $("#new-pass").val() === $("#new2-pass").val() ){
       var ventana = $('<p>¿Realmente deseas cambiar la contraseña?</p>').dialog({
         title: "Confirmar",
         modal: true,
@@ -106,6 +106,22 @@ $(document).ready(function() {
       });
     }else {
       alert("Las nuevas contraseñas no coinciden");
+    }
+  });
+
+
+  $("#new-pass").keyup(function(){
+    if( $("#new-pass").val() === $("#new2-pass").val() ){
+      $("#errorPass").hide();
+    }else{
+      $("#errorPass").show();
+    }
+  });
+  $("#new2-pass").keyup(function(){
+    if( $("#new-pass").val() === $("#new2-pass").val() ){
+      $("#errorPass").hide();
+    }else{
+      $("#errorPass").show();
     }
   });
 

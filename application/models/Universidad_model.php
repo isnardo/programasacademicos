@@ -58,11 +58,12 @@ class Universidad_model extends CI_Model {
 		' SELECT t1.LicenciaturaId,
 						 t1.LicenciaturaNombre
 			FROM Licenciatura AS t1
+			WHERE FacultadId = ?
 			ORDER BY t1.LicenciaturaNombre
 		';
 
 		//Execute query with security scape variables
-		$result = $this->db->query( $query );
+		$result = $this->db->query( $query,array($id) );
 
 		//Check if user exists and return data
 		if( $result->num_rows() > 0 ){
@@ -81,6 +82,29 @@ class Universidad_model extends CI_Model {
 						 t1.NivelUsuNombre
 			FROM NivelUsuario AS t1
 			ORDER BY t1.NivelUsuId
+		';
+
+		//Execute query with security scape variables
+		$result = $this->db->query( $query );
+
+		//Check if user exists and return data
+		if( $result->num_rows() > 0 ){
+			$data = $result;
+		}
+		else {
+			$data = false;
+		}
+
+		return $data;
+	}
+
+	// Regresa los tipos de usuarios
+	public function return_tipos_usuario( ){
+		$query =
+		' SELECT t1.TipoUsuId,
+						 t1.TipoUsuNombre
+			FROM TipoUsuario AS t1
+			ORDER BY t1.TipoUsuNombre
 		';
 
 		//Execute query with security scape variables

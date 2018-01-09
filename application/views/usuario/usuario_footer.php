@@ -13,6 +13,8 @@
   <script src="<?=base_url('assets/js/user-profile.js');?>" ></script>
   <!--Error report -->
   <script src="<?=base_url('assets/js/error.js');?>" ></script>
+  <!--Error report -->
+  <script src="<?=base_url('assets/js/user-new.js');?>" ></script>
 
 </footer>
 </html>

@@ -68,6 +68,53 @@ class Usuario_model extends CI_Model {
 		return $result;
 	}
 
+	// Revisa si exite el nombre de acceso para un usuario dado
+	public function check_username( $user ){
+		$query =
+		'SELECT *
+		 FROM Usuario
+		 WHERE UsuarioAcceso = ?
+		';
+
+		$result = $this->db->query( $query,array($user) );
+
+		return $result->num_rows();
+	}
+
+	//Crea un nuevo usuario para el sistema
+	public function new_user( $data ){
+		$query =
+		'INSERT INTO Usuario
+		(	UsuarioAcceso,
+			UsuarioPassword,
+			UsuarioEmail,
+			NivelUsuId,
+			TipoUsuId,
+			UsuarioNombre,
+			UsuarioApellidos,
+			FacultadId,
+			LicenciaturaId
+		)
+		VALUES ( ?,?,?,?,?,?,?,?,? )
+		';
+		// Valores
+		$values = array(
+			$data['username'],
+			$data['pass'],
+			$data['email'],
+			$data['nivel'],
+			$data['tipo'],
+			$data['nombre'],
+			$data['apellidos'],
+			$data['facultad'],
+			$data['licenciatura']
+		);
+
+		$result = $this->db->query( $query,$values );
+
+		return $this->db->insert_id();
+	}
+
 	//return all user data contained in tables user and userData
 	public function return_user_fulldata( $user ){
     //Clean variable for input

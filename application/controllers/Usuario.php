@@ -49,20 +49,89 @@ class Usuario extends CI_Controller {
 		$this->validate_session();
 
 		$this->load->model('universidad_model');
+		$facultades = $this->universidad_model->return_facultades();
 
 		$data['facultades'] = $this->main->render_select(
-			$this->universidad_model->return_facultades()
-			,'facultad');
+			$facultades,'facultad'
+		);
 
 		$data['niveles'] = $this->main->render_select(
 	 		$this->universidad_model->return_niveles_acceso()
-	 		,'nivel');
+	 		,'nivel'
+		);
+
+		$data['tipos'] = $this->main->render_select(
+	 		$this->universidad_model->return_tipos_usuario()
+	 		,'tipo'
+		);
+
+		$data['licenciaturas'] = $this->main->render_select(
+			$this->universidad_model->return_licenciaturas(
+				$facultades->row()->FacultadId
+			),'licenciatura'
+		);
 
 		$this->load->view('usuario/usuario_header');
 		$this->load->view('usuario/usuario_nuevo',$data);
 		$this->load->view('usuario/usuario_footer');
 	}
 
+	//Revisa si existe el nombre de acceso para un usuario solicitado
+	public function revisa_username(){
+		$this->validate_session();
+
+		$this->load->model('usuario_model');
+
+		$exist = $this->usuario_model->check_username(
+			$this->input->post('username')
+		);
+
+		$json = array('exist' => $exist );
+
+		$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
+	}
+
+	public function licenciaturas(){
+		$this->validate_session();
+
+		$this->load->model('universidad_model');
+		$id = intval( $this->input->post('facultad') );
+		$lics = $this->universidad_model->return_licenciaturas( $id );
+
+		$html = '';
+		foreach( $lics->result() as $row ){
+			$html = $html.'<option value="'.$row->LicenciaturaId.'" >';
+			$html = $html.$row->LicenciaturaNombre.'</option>';
+		}
+
+		$json = array('html' => $html);
+
+		$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
+	}
+
+	//Da de alta a un nuevo usuario
+	public function crear(){
+		$this->validate_session();
+		$this->load->model('usuario_model');
+
+		$data = $this->input->post();
+		$data['pass'] = hash('sha256',$data['password_1']);
+
+		$id = $this->usuario_model-> new_user( $data );
+		$html = '<b>El usuario "'.$data['username'].'" quedó registrado con el ID => '.$id.'</b>';
+
+		$json = array(
+			'msg' => $html
+		);
+
+		$out = json_encode( $json );
+		header('Content-Type: application/json');
+		echo $out;
+	}
 
 	// Comentarios para los usuarios
 	public function comentarios(){

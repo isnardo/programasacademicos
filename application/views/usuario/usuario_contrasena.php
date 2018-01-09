@@ -41,6 +41,9 @@
                 <input class="form-control" id="new2-pass" name="new2-pass" type="password" value=""
                 placeholder="Repetir nueva contraseña"  disabled required>
               </div>
+              <div class="alert alert-danger alert-dismissable" id="errorPass" style="display:none;">
+                <b>La nueva contraseña no coincide</b>
+              </div>
               <button id="pass-btn-update" type="button" class="btn btn-outline btn-primary" disabled>
                 Actualizar
               </button>
