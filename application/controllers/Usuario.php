@@ -65,11 +65,15 @@ class Usuario extends CI_Controller {
 	 		,'tipo'
 		);
 
-		$data['licenciaturas'] = $this->main->render_select(
-			$this->universidad_model->return_licenciaturas(
-				$facultades->row()->FacultadId
-			),'licenciatura'
-		);
+		if( $facultades ){
+			$data['licenciaturas'] = $this->main->render_select(
+				$this->universidad_model->return_licenciaturas(
+					$facultades->row()->FacultadId
+				),'licenciatura'
+			);
+		}else{
+			$data['licenciaturas'] = '<select id="licenciatura" id="name" class="form-control"></select>';
+		}
 
 		$this->load->view('usuario/usuario_header');
 		$this->load->view('usuario/usuario_nuevo',$data);

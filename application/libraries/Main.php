@@ -19,13 +19,16 @@ class Main{
 
   //render select with a given array and id
   public function render_select( $data,$name ){
-    $html = '<select id="'.$name.'" name="'.$name.'" class="form-control">';
+    $html = '<select id="'.$name.'"name="'.$name.'"class="form-control">';
 
-    foreach ( $data->result_array() as $row ){
-      $keys = array_keys($row);
-      $html = $html.'<option value="'.$row[$keys[0]].'" >';
-      $html = $html.$row[$keys[1]].'</option>';
+    if( $data ){
+      foreach ( $data->result_array() as $row ){
+        $keys = array_keys($row);
+        $html = $html.'<option value="'.$row[$keys[0]].'" >';
+        $html = $html.$row[$keys[1]].'</option>';
+      }
     }
+    
     $html = $html.'</select>';
 
     return $html;
