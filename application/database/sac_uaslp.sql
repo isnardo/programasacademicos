@@ -634,6 +634,12 @@ CREATE TABLE `TipoUsuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+LOCK TABLES `TipoUsuario` WRITE;
+/*!40000 ALTER TABLE `TipoUsuario` DISABLE KEYS */;
+INSERT INTO `TipoUsuario` (`TipoUsuId`, `TipoUsuNombre`) VALUES (NULL, 'Profesor-Investigador'), (NULL, 'Profesor Hora Clase'), (NULL, 'Administrativo'), (NULL, 'Secretaría Académica'), (NULL, 'Coordinador de Licenciatura'), (NULL, 'Presidente de Academia'), (NULL, 'Comisión Curricular');
+/*!40000 ALTER TABLE `TipoUsuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `Unidad`
 --

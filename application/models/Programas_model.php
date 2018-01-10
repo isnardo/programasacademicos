@@ -12,20 +12,36 @@ class Programas_model extends CI_Model {
 
 	//return all user data contained in tables user and userData
 	public function return_list( $licenciatura ){
-		// Clean input
-		$licenciatura = $this->main->prepare_sql_input( $licenciatura );
-    //Prepare sql query
-    $query =
-    ' SELECT t1.ProgAcademicoId,t1.ProgAcademicoVersion,
-			t2.MateriaNombre
-			FROM ProgramaAcademico AS t1
-			LEFT JOIN Materia AS t2
-			ON t1.MateriaId = t2.MateriaId
-			WHERE t2.LicenciaturaId = ?
-			ORDER BY t1.ProgAcademicoVersion
-    ';
-    //Execute query with security scape variables
-		$result = $this->db->query( $query,array($licenciatura) );
+		if( $licenciatura ){
+			// Clean input
+			$licenciatura = $this->main->prepare_sql_input( $licenciatura );
+	    //Prepare sql query
+	    $query =
+	    ' SELECT t1.ProgAcademicoId,t1.ProgAcademicoVersion,
+				t2.MateriaNombre
+				FROM ProgramaAcademico AS t1
+				LEFT JOIN Materia AS t2
+				ON t1.MateriaId = t2.MateriaId
+				WHERE t2.LicenciaturaId = ?
+				ORDER BY t1.ProgAcademicoVersion
+	    ';
+
+			//Execute query with security scape variables
+			$result = $this->db->query( $query,array( $licenciatura ) );
+		}else{
+			$query =
+	    ' SELECT t1.ProgAcademicoId,t1.ProgAcademicoVersion,
+				t2.MateriaNombre
+				FROM ProgramaAcademico AS t1
+				LEFT JOIN Materia AS t2
+				ON t1.MateriaId = t2.MateriaId
+				ORDER BY t1.ProgAcademicoVersion
+	    ';
+
+			//Execute query with security scape variables
+			$result = $this->db->query( $query );
+		}
+
 
 		//Check if user exists and return data
 		if( $result->num_rows() > 0 ){

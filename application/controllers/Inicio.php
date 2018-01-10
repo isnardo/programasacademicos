@@ -38,8 +38,8 @@ class Inicio extends CI_Controller {
 		$this->load->library('programas_lib');
 		$this->load->model('usuario_model');
 
-		// Cargar lista de programas academicos disponibles para la licenciatura que pertenece
-		$data['lista'] = $this->programas_lib->render_lista( $this->session->userdata('lic_id')  );
+		//Cargar lista de programas academicos disponibles para la licenciatura que pertenece
+		$data['lista'] = $this->programas_lib->render_lista( $this->session->userdata('lic_id') );
 		//Modificaciones sugeridas por el usuario
 		$comments = $this->usuario_model->cuenta_comentarios( $this->session->userdata('id') );
 		$data['pendientes'] = $comments->Pendientes;

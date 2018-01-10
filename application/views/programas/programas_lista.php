@@ -10,7 +10,7 @@
   <div class="row">
       <div class="col-lg-12">
           <h2 class="page-header">
-            Programas Académicos de Matemática Educativa
+            Programas Académicos
           </h2>
       </div>
       <!-- /.col-lg-12 -->
