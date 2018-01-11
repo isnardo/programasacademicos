@@ -22,7 +22,7 @@
   <div class="col-lg-4">
         <div class="panel panel-default" id="panel-modificaciones">
             <div class="panel-heading">
-                Modificaciones
+                <a href="<?=$comentarios_url;?>">Modificaciones</a>
                 <button id="btn-modificar" type="button" class="btn btn-default btn-xs pull-right" onclick="dialog_open('#new-modif-dialog');">
                     <i class="fa fa-pencil"></i> Sugerir
                 </button>

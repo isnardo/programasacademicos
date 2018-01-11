@@ -31,6 +31,12 @@ CREATE TABLE `Apartado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+LOCK TABLES `Apartado` WRITE;
+/*!40000 ALTER TABLE `Apartado` DISABLE KEYS */;
+INSERT INTO `Apartado` (`ApartadoId`, `ApartadoLetra`, `ApartadoNombre`) VALUES (NULL, 'A','Nombre del curso'), (NULL, 'B','Datos básicos'), (NULL, 'C','Objetivos del curso'), (NULL, 'D','Contenidos y métodos'), (NULL, 'E','Estrategias de enseñanza y aprendizaje'), (NULL, 'F','Evaluación y acreditación'), (NULL, 'G','Bibliografía y recursos informáticos') ;
+/*!40000 ALTER TABLE `Apartado` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `Bibliografia`
 --
@@ -65,6 +71,12 @@ CREATE TABLE `BibliografiaTipo` (
   PRIMARY KEY (`BiblioTipoId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `BibliografiaTipo` WRITE;
+/*!40000 ALTER TABLE `BibliografiaTipo` DISABLE KEYS */;
+INSERT INTO `BibliografiaTipo` (`BiblioTipoId`, `BiblioTipoNombre`, `BiblioTipoNombres`) VALUES (NULL, 'Texto Básico', 'Textos Básicos'), (NULL, 'Sitio de Internet', 'Sitios de Internet');
+/*!40000 ALTER TABLE `BibliografiaTipo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `CompProfesional`
@@ -134,6 +146,13 @@ CREATE TABLE `Criterio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+LOCK TABLES `Criterio` WRITE;
+/*!40000 ALTER TABLE `Criterio` DISABLE KEYS */;
+INSERT INTO `Criterio` (`CriterioId`, `CriterioNombre`, `CriterioDescripcion`) VALUES (NULL, 'Resultados de aprendizaje', NULL), (NULL, 'Valoración de la secuencia de enseñanza en clase', NULL), (NULL, 'Comparación con otros programas', NULL), (NULL, 'Comparación con índices de libros', NULL), (NULL, 'Valoración de resultados de investigación própios', NULL), (NULL, 'Valoración de resultados de investigación en revístas científicas', NULL), (NULL, 'Valoración de resultados de evaluación', NULL), (NULL, 'Otro', NULL);
+/*!40000 ALTER TABLE `Criterio` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `Curso`
 --
@@ -189,6 +208,12 @@ CREATE TABLE `EstadoModificacion` (
   PRIMARY KEY (`EstdModifId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `EstadoModificacion` WRITE;
+/*!40000 ALTER TABLE `EstadoModificacion` DISABLE KEYS */;
+INSERT INTO `EstadoModificacion` (`EstdModifId`, `EstdModifNombre`) VALUES (NULL, 'Pendiente'), (NULL, 'Aprobada'), (NULL, 'Rechazada');
+/*!40000 ALTER TABLE `EstadoModificacion` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `EstrategiaDidactica`
@@ -521,7 +546,7 @@ CREATE TABLE `ProgramaAcademico` (
   `ProgAcademicoHrsAdicional` tinyint(2) unsigned NOT NULL,
   `ProgAcademicoCreditos` tinyint(2) unsigned NOT NULL,
   `ProgAcademicoObjGeneral` text NOT NULL COMMENT 'Objetivo general de la materia',
-  `TipoMateriaId` int(10) unsigned NOT NULL COMMENT 'Tipo de materia que es. Optativa, obligatoria etc.',
+  `TipoMateriaId` int(10) unsigned DEFAULT NULL COMMENT 'Tipo de materia que es. Optativa, obligatoria etc.',
   `TipoPropCurrId` int(10) unsigned DEFAULT NULL COMMENT 'Tipo de propuesta curricular, modificacion, nueva creacion, etc.',
   `ProgAcademicoCompartido` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Es el programa academico una materia compartida con otras licenciaturas si-no',
   `ProgAcademicoSeriado` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Es el programa academico una materia seriada  si-no',

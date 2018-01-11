@@ -49,6 +49,8 @@ $( document ).ready( function() {
       mensaje:"¿Realmente desea sugerir este cambio?",
       si:(function(){
         var form = $("#new-modif-form");
+        //form.submit();
+
         // Calling with AJAX to check user
         $.ajax({
           url: form.attr("action"),
@@ -84,7 +86,7 @@ $( document ).ready( function() {
 
         });
         // END ajax
-
+        
       }),
       no:(function(){
       })

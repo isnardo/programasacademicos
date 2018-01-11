@@ -368,6 +368,46 @@ class Programa{
 
   }
 
+  public function render_comentario2( $comment,$id ){
+    //Load library
+    $ci =& get_instance();
+    $ci->load->library('main');
+    // Define variables
+    $length = $this->comment_length;
+    $photo = $ci->main->user_photo( $comment->UsuarioId.$comment->UsuarioFoto );
+    $dialog_id = 'dialog-modif-'.$id;
+    $apartado = ucfirst( mb_strtolower($comment->ApartadoNombre,'UTF-8') );
+
+    // generate HTML
+    $html = '<li class="left clearfix">
+            <span class="chat-img pull-left">';
+    $html = $html.'<img src="'.$photo.'"';
+    $html = $html. ' alt="User Avatar" class="img-circle" width="40" height="40"/>
+            </span>';
+    $html = $html.'<div class="chat-body clearfix">
+            <div class="header">
+            <strong class="primary-font">';
+    $html = $html.$comment->UsuarioNombre.'</strong>';
+    $html = $html.'<small class=" text-muted">
+            <p> <i class="fa fa-tag fa-fw"></i> ';
+    $html = $html.$apartado.'</p>';
+    $html = $html.'<p><i class="fa fa-calendar fa-fw"></i> '.$comment->ModifFecha;
+    $html = $html.' <i class="fa fa-clock-o fa-fw"></i> '.$comment->ModifHora.'</p>';
+    $html = $html.'</small></div><p>';
+
+    // Revisamos que el comentario no sea tan largo
+    $html = $html. $comment->ModifSugerencia;
+
+    // Botón para ver más
+    $html = $html.'</p></div>';
+
+
+    $html = $html.'</li>';
+
+    return $html;
+
+  }
+
   public function render_comentarios(){
     $html = '<ul class="chat">';
     $i = 0;
@@ -379,6 +419,21 @@ class Programa{
     }// END IF
     $html = $html.'</ul>';
     $html = $html.'<input id="numero_comentarios" type="hidden" value="'.$i.'">';
+    $this->numero_comentarios = $i;
+
+    return $html;
+  }
+
+  public function render_comentarios2(){
+    $html = '<ul class="chat">';
+    $i = 0;
+    if( $this->comentarios ){
+      foreach( $this->comentarios->result() as $row ){
+        $html = $html.$this->render_comentario2( $row,$i );
+        $i++;
+      }
+    }// END IF
+    $html = $html.'</ul>';
     $this->numero_comentarios = $i;
 
     return $html;

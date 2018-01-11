@@ -349,6 +349,7 @@ class Programas_model extends CI_Model {
 		);
 
 		$id = false;
+
 		//Execute query with security scape variables
 		if( $this->db->query( $query,$values ) ){
 			// Select last ID inserted
@@ -356,6 +357,7 @@ class Programas_model extends CI_Model {
 			$result = $this->db->query( $query );
 			$id = $result->row()->id;
 		}
+
 		// Return comment inserted id
 		return $id;
 	}

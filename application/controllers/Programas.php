@@ -83,6 +83,7 @@ class Programas extends CI_Controller {
 		$data['licenciatura'] = $this->programa->licenciatura();
 		// Nombre en Mayusculas
 		$data['programa_id'] = $id;
+		$data['comentarios_url'] = site_url('programas/comentarios?programa='.$id);
 		$data['usuario'] = $this->session->userdata['id'];
 		$data['programa'] = $this->programa->render();
 		$data['comentarios'] = $this->programa->render_comentarios();
@@ -95,6 +96,25 @@ class Programas extends CI_Controller {
 		$this->load->view('programas/programas_ver_header');
 		$this->load->view('programas/programas_ver',$data);
 		$this->load->view('programas/programas_ver_footer');
+	}
+
+	public function comentarios(){
+		$this->validate_session();
+
+		$id = $this->input->get('programa');
+		$data['regresar'] = site_url('programas/ver?programa='.$id);
+
+		$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
+
+		$this->load->library( 'programa',array('id' => $id) );
+		$data['programa_nombre'] = $this->programa->nombre();
+		$data['programa_comentarios'] = $this->programa->render_comentarios2();
+
+		// Cargamos la vista
+		$this->load->view('programas/programas_ver_header');
+		$this->load->view('programas/programas_comentarios',$data);
+		$this->load->view('programas/programas_ver_footer');
+
 	}
 
 	public function nuevocomentario(){
