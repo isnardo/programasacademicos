@@ -86,7 +86,7 @@ class Programas extends CI_Controller {
 		$data['comentarios_url'] = site_url('programas/comentarios?programa='.$id);
 		$data['usuario'] = $this->session->userdata['id'];
 		$data['programa'] = $this->programa->render();
-		$data['comentarios'] = $this->programa->render_comentarios();
+		$data['comentarios'] = $this->programa->render_comentarios_side();
 		$data['numero_comentarios'] = $this->programa->get_num_commentarios();
 
 		$data['url_nuevo_comentario'] = site_url('programas/nuevocomentario');
@@ -108,8 +108,9 @@ class Programas extends CI_Controller {
 
 		$this->load->library( 'programa',array('id' => $id) );
 		$data['programa_nombre'] = $this->programa->nombre();
-		$data['programa_comentarios'] = $this->programa->render_comentarios2();
+		$data['programa_comentarios'] = $this->programa->render_comentarios_full();
 
+		$data['error'] = $this->main->render_error_dialog();
 		// Cargamos la vista
 		$this->load->view('programas/programas_ver_header');
 		$this->load->view('programas/programas_comentarios',$data);
@@ -126,7 +127,7 @@ class Programas extends CI_Controller {
 		$id_comment = $this->programas_model->nuevo_comentario( $this->input->post() );
 		$comment = $this->programas_model->return_comentario( $id_comment );
 		$dialog_id = intval( $this->input->post( 'comments' ) );
-		$html = $this->programa->render_comentario( $comment,$dialog_id );
+		$html = $this->programa->render_comentario_side( $comment,$dialog_id );
 
 		$json = array(
 			'html'		=> $html,

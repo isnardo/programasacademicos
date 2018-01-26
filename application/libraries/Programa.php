@@ -302,7 +302,7 @@ class Programa{
     return $html;
   }
 
-  public function render_comentario( $comment,$id ){
+  public function render_comentario_side( $comment,$id ){
     //Load library
     $ci =& get_instance();
     $ci->load->library('main');
@@ -322,11 +322,11 @@ class Programa{
             <div class="header">
             <strong class="primary-font">';
     $html = $html.$comment->UsuarioNombre.'</strong>';
-    $html = $html.'<small class=" text-muted">
-            <p> <i class="fa fa-tag fa-fw"></i> ';
-    $html = $html.$apartado.'</p>';
+    $html = $html.'<small class=" text-muted">';
     $html = $html.'<p><i class="fa fa-calendar fa-fw"></i> '.$comment->ModifFecha;
     $html = $html.' <i class="fa fa-clock-o fa-fw"></i> '.$comment->ModifHora.'</p>';
+    $html = $html.'<p> <i class="fa fa-tag fa-fw"></i> ';
+    $html = $html.$apartado.'</p>';
     $html = $html.'</small></div><p>';
 
     // Revisamos que el comentario no sea tan largo
@@ -345,6 +345,10 @@ class Programa{
     //Ventana Emergente
     $html = $html.'<div id="';
     $html = $html.$dialog_id.'" title="Modificación sugerida">';
+    $html = $html.'<small class=" text-muted">';
+    $html = $html.'<p><i class="fa fa-calendar fa-fw"></i> '.$comment->ModifFecha;
+    $html = $html.' <i class="fa fa-clock-o fa-fw"></i> '.$comment->ModifHora.'</p>';
+    $html = $html.'</small>';
     $html = $html.'<b>Apartado</b><p>';
     $html = $html.$apartado.'</p>';
     $html = $html.'<b>Criterio</b><p>';
@@ -368,7 +372,7 @@ class Programa{
 
   }
 
-  public function render_comentario2( $comment,$id ){
+  public function render_comentario_full( $comment,$id ){
     //Load library
     $ci =& get_instance();
     $ci->load->library('main');
@@ -388,15 +392,18 @@ class Programa{
             <div class="header">
             <strong class="primary-font">';
     $html = $html.$comment->UsuarioNombre.'</strong>';
-    $html = $html.'<small class=" text-muted">
-            <p> <i class="fa fa-tag fa-fw"></i> ';
-    $html = $html.$apartado.'</p>';
+    $html = $html.'<small class=" text-muted">';
     $html = $html.'<p><i class="fa fa-calendar fa-fw"></i> '.$comment->ModifFecha;
     $html = $html.' <i class="fa fa-clock-o fa-fw"></i> '.$comment->ModifHora.'</p>';
-    $html = $html.'</small></div><p>';
-
-    // Revisamos que el comentario no sea tan largo
-    $html = $html. $comment->ModifSugerencia;
+    $html = $html.'</small></div></p>';
+    $html = $html.'<b>Apartado</b><p>  ';
+    $html = $html.$apartado.'</p>';
+    $html = $html.'<b>Criterio</b><p>';
+    $html = $html.$comment->CriterioNombre.'</p>';
+    $html = $html.'<b>Cambio sugerido</b><p>';
+    $html = $html.$comment->ModifSugerencia.'</p>';
+    $html = $html.'<b>Justificación</b><p>';
+    $html = $html.$comment->ModifJustificacion.'</p>';
 
     // Botón para ver más
     $html = $html.'</p></div>';
@@ -408,12 +415,12 @@ class Programa{
 
   }
 
-  public function render_comentarios(){
+  public function render_comentarios_side(){
     $html = '<ul class="chat">';
     $i = 0;
     if( $this->comentarios ){
       foreach( $this->comentarios->result() as $row ){
-        $html = $html.$this->render_comentario( $row,$i );
+        $html = $html.$this->render_comentario_side( $row,$i );
         $i++;
       }
     }// END IF
@@ -424,12 +431,12 @@ class Programa{
     return $html;
   }
 
-  public function render_comentarios2(){
+  public function render_comentarios_full(){
     $html = '<ul class="chat">';
     $i = 0;
     if( $this->comentarios ){
       foreach( $this->comentarios->result() as $row ){
-        $html = $html.$this->render_comentario2( $row,$i );
+        $html = $html.$this->render_comentario_full( $row,$i );
         $i++;
       }
     }// END IF

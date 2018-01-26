@@ -51,6 +51,8 @@ class Usuario extends CI_Controller {
 		$this->load->model('universidad_model');
 		$facultades = $this->universidad_model->return_facultades();
 
+		$data['error'] = $this->main->render_error_dialog();
+
 		$data['facultades'] = $this->main->render_select(
 			$facultades,'facultad'
 		);

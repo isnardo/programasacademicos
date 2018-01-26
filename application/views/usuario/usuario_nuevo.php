@@ -114,5 +114,6 @@
 
 </div>
 <!-- /#wrapper -->
+<?=$error;?>
 
 </body>

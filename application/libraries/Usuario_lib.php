@@ -37,10 +37,10 @@ class Usuario_lib{
     $html = $html.$comment->ProgAcademicoId.'">';
     $html = $html.$comment->MateriaNombre;
     $html = $html.' (Versión: '.$comment->ProgAcademicoVersion.')</a></p>';
-    $html = $html.'<p> <i class="fa fa-tag fa-fw"></i> '.$apartado.'</p>';
     $html = $html.'<p><i class="fa fa-calendar fa-fw"></i> '.$comment->ModifFecha;
     $html = $html.' <i class="fa fa-clock-o fa-fw"></i> '.$comment->ModifHora.'</p>';
     $html = $html.'</div></div>';
+     $html = $html.'<b>Apartado</b><p>'.$apartado.'</p>';
     $html = $html.'<b>Cambio sugerido</b><p style="text-align:justify;">';
     $html = $html.$comment->ModifSugerencia.'</p>';
     $html = $html.'<b>Justificación</b><p style="text-align:justify;">';

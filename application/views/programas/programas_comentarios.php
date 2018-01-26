@@ -41,5 +41,5 @@
 
 </div>
 <!-- /#wrapper -->
-
+<?=$error;?>
 </body>
