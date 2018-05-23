@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: localhost    Database: sacuaslp
+-- Host: localhost    Database: programas
 -- ------------------------------------------------------
 -- Server version	5.7.20-0ubuntu0.16.04.1
 

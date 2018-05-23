@@ -362,4 +362,49 @@ class Programas_model extends CI_Model {
 		return $id;
 	}
 
+	// Regresa los criterios que se consideran para sugerir modificaciones
+	public function return_criterios(){
+		// Clean input
+		$query =
+    ' SELECT t1.CriterioId,
+						 t1.CriterioNombre,
+			       t1.CriterioDescripcion
+			FROM Criterio AS t1
+			ORDER BY t1.CriterioId
+    ';
+		//Execute query with security scape variables
+		$result = $this->db->query( $query );
+		//Check if user exists and return data
+		if( $result->num_rows() > 0 ){
+			$data = $result;
+		}
+		else {
+			$data = false;
+		}
+
+		return $data;
+	}
+
+	public function return_apartados(){
+		// Clean input
+		$query =
+    ' SELECT t1.ApartadoId,
+						 t1.ApartadoNombre,
+			       t1.ApartadoLetra
+			FROM Apartado AS t1
+			ORDER BY t1.ApartadoLetra
+    ';
+		//Execute query with security scape variables
+		$result = $this->db->query( $query );
+		//Check if user exists and return data
+		if( $result->num_rows() > 0 ){
+			$data = $result;
+		}
+		else {
+			$data = false;
+		}
+
+		return $data;
+	}
+
 }

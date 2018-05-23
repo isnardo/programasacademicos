@@ -50,7 +50,6 @@ $( document ).ready( function() {
       si:(function(){
         var form = $("#new-modif-form");
         //form.submit();
-
         // Calling with AJAX to check user
         $.ajax({
           url: form.attr("action"),

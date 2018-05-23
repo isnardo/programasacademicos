@@ -75,6 +75,7 @@ class Programas extends CI_Controller {
 		}
 		// Load library programa
 		$this->load->library( 'programa',array('id' => $id) );
+		$user = $this->session->userdata['id'];
 
 		$data['menu'] = $this->menu->render_user_menu( $this->session->userdata['menu'] );
 		$data['error'] = $this->main->render_error_dialog();
@@ -84,13 +85,13 @@ class Programas extends CI_Controller {
 		// Nombre en Mayusculas
 		$data['programa_id'] = $id;
 		$data['comentarios_url'] = site_url('programas/comentarios?programa='.$id);
-		$data['usuario'] = $this->session->userdata['id'];
+		$data['usuario'] = $user;
 		$data['programa'] = $this->programa->render();
 		$data['comentarios'] = $this->programa->render_comentarios_side();
 		$data['numero_comentarios'] = $this->programa->get_num_commentarios();
+		$data['nuevo_comentario'] = $this->programa->render_ventana_nuevo_comentario($data);
 
 		$data['url_nuevo_comentario'] = site_url('programas/nuevocomentario');
-		$data['img_loading'] = $this->main->image('loading.gif');
 
 		// Cargamos la vista
 		$this->load->view('programas/programas_ver_header');

@@ -26,7 +26,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //--hostinger matematica educativa--//
 //$config['base_url'] = 'http://matematicaeducativa.xyz/programas/';
 //--my personal servers--//
-$config['base_url'] = 'http://localhost/programasacademicos';
+//$config['base_url'] = 'http://localhost/programasacademicos';
+
+//Servidor de Desarrollo ISNARDO
+$config['base_url'] ='http://148.224.28.135/programas/';
 
 //--PRODUCCION FC--//
 //$config['base_url'] = 'http://148.224.2.177/programas/';
@@ -386,7 +389,7 @@ $config['encryption_key'] = 'fc_fci_uaslp';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = BASEPATH .'ci_sessions';
+$config['sess_save_path'] = sys_get_temp_dir();//BASEPATH .'ci_sessions';
 $config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

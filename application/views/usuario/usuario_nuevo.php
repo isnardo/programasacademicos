@@ -14,12 +14,6 @@
         <div class="row">
 
          <div class="col-lg-8">
-           <div class="alert alert-danger alert-dismissable" id="errorAlert" style="display:none;">
-             <b>Error al dar de alta al usuario.</b>
-           </div>
-           <div class="alert alert-success alert-dismissable" id="successAlert" style="display:none;">
-             <b>El usuario fue dado de alta correctamente.</b>
-           </div>
 
             <form role="form" id="form-user-new" role="form" method="POST" action="<?=site_url('usuario/');?>">
             <div id="panel-form-data" class="panel panel-info">
@@ -111,6 +105,13 @@
       <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
+    <div class="alert alert-danger alert-dismissable" id="errorAlert" style="display:none;">
+      <b>Error al dar de alta al usuario.</b>
+    </div>
+    <div class="alert alert-success alert-dismissable" id="successAlert" style="display:none;">
+      <b>El usuario fue dado de alta correctamente.</b>
+    </div>
+
 
 </div>
 <!-- /#wrapper -->

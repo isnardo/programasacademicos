@@ -97,11 +97,12 @@ $db['default'] = array(
 
 $db['sac_fc'] = array(
 	'dsn'	=> '',
-	//--LOCALHOST--//
+	//--SERVIDOR DE DESARROLLO--//
+	//--http://148.224.28.135--//
 	'hostname' => 'localhost',
-	'username' => 'user_sac',
-	'password' => 'SAC_FC_2017',
-	'database' => 'sacuaslp',
+	'username' => 'programas_user',
+	'password' => 'Aq2WTLxn',
+	'database' => 'programas',
 	//--HOSTINGER--//
 /*
 	'hostname' => 'mysql.hostinger.es',

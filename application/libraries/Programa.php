@@ -446,6 +446,83 @@ class Programa{
     return $html;
   }
 
+
+  public function render_ventana_nuevo_comentario($data){
+    $ci =& get_instance();
+    $ci->load->library('main');
+    $ci->load->model('programas_model');
+    $criterios = $ci->programas_model->return_criterios();
+    $apartados = $ci->programas_model->return_apartados();
+
+    $html = '<div id="new-modif-dialog" title="Sugerir modificación">
+      <form role="form" id="new-modif-form" action="';
+    $html = $html.site_url('programas/nuevocomentario');
+    $html = $html.'" method="POST">
+        <div class="form-group">
+          <label>Apartado</label>
+          <select class="form-control" id="new-modif-apartado" name="apartado">';
+    if( $apartados->num_rows() > 0 ){
+      foreach ( $apartados->result() as $row ){
+        //render criterios
+        $html = $html.'<option value="'.$row->ApartadoId.'">'.$row->ApartadoLetra.') '.$row->ApartadoNombre.'</option>';
+      }
+    }
+    $html = $html.'
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Criterios</label>
+          <select class="form-control" id="new-modif-criterio" name="criterio">';
+     if( $criterios->num_rows() > 0 ){
+       foreach ( $criterios->result() as $row ){
+        //render criterios
+        $html = $html.'<option value="'.$row->CriterioId.'">'.$row->CriterioNombre.'</option>';
+      }
+     }
+
+     $html = $html.'</select></div><div class="form-group">';
+         if( $criterios->num_rows() > 0 ){
+           foreach ( $criterios->result() as $row ){
+            //render criterios
+            $html = $html.'<div class="text-info" style="display:none;" id=cri-"'.$row->CriterioId.'">'.$row->CriterioDescripcion.'</div>';
+          }
+         }
+
+      $html = $html.'
+        </div>
+        <div class="form-group">
+          <label>Cambio sugerido</label>
+          <textarea class="form-control" id="new-modif-cambio" name="sugerencia"
+          placeholder="Describa el cambio que sugiere" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Justificación</label>
+          <textarea class="form-control" id="new-modif-justificacion" name="justificacion"
+          placeholder="Justifique brevemente el cambio sugerido" rows="2" required></textarea>
+        </div>
+        <button type="button" id="btn-save-modif" class="btn btn-primary"
+         width="40" disabled>Sugerir</button>
+        ';
+    // Botón para cerrar el modal dialog
+    $html = $html.'<button type="button" id="btn-close-modif" class="btn btn-default"
+         width="40" onclick="dialog_close(';
+    $html = $html."'#new-modif-dialog'";
+    $html = $html.');">Cerrar</button>';
+    //Campos ocultos de la ventana
+    $html = $html.'<input type="hidden" id="new-modif-programa" name="programa" value="'.$data['programa_id'].'">';
+    $html = $html.'<input type="hidden" id="new-modif-usuario" name="usuario" value="'.$data['usuario'].'">
+        <input type="hidden" id="number-comments" name="comments" value="'.$data['numero_comentarios'].'">
+      </form>
+    ';
+    $html = $html.'
+      <div id="divLoading" style="display:none;position:absolute;z-index:10;top:30%;left: 45%;">
+        <img src="'.$ci->main->image('loading.gif').'" height="42" width="42" >
+      </div>
+    </div>';
+
+    return $html;
+  }
+
   public function get_num_commentarios(){
     return $this->numero_comentarios;
   }

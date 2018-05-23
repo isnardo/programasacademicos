@@ -15,7 +15,8 @@ class Programas_lib{
     $list = $CI->programas_model->return_list( $lic_id );
 
     $CI->load->model('universidad_model');
-    $name = $CI->universidad_model->return_lic_name( $lic_id );
+    $name = '<b>'.$CI->universidad_model->return_lic_name( $lic_id ).'</b> </br>
+          <i>De click en le botón Ver para revisar el programa y sugerir modificaciones</i>';
 
 
     $html = '<div class="panel panel-default">
