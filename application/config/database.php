@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'user_sistemas',
-	'password' => 'imyourdj',
-	'database' => 'sistema',
+	'username' => 'put-the-user-name',
+	'password' => 'put-the-password',
+	'database' => 'put-the-name-of-data-base',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -97,19 +97,10 @@ $db['default'] = array(
 
 $db['sac_fc'] = array(
 	'dsn'	=> '',
-	//--SERVIDOR DE DESARROLLO--//
-	//--http://148.224.28.135--//
 	'hostname' => 'localhost',
-	'username' => 'programas_user',
-	'password' => 'Aq2WTLxn',
-	'database' => 'programas',
-	//--HOSTINGER--//
-/*
-	'hostname' => 'mysql.hostinger.es',
-	'username' => 'u243137412_usac',
-	'password' => 'SAC_FC_2017',
-	'database' => 'u243137412_sac',
-*/
+	'username' => 'put-the-user-name',
+	'password' => 'put-the-password',
+	'database' => 'put-the-name-of-data-base',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
