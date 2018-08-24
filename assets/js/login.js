@@ -75,5 +75,6 @@ $(document).ready(function() {
     // END ajax
   });
   // END submit Form
+
 });
 // End Document Ready

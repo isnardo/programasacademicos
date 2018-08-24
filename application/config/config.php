@@ -26,10 +26,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //--hostinger matematica educativa--//
 //$config['base_url'] = 'http://matematicaeducativa.xyz/programas/';
 //--my personal servers--//
-//$config['base_url'] = 'http://localhost/programasacademicos';
+$config['base_url'] = 'http://localhost/programasacademicos';
 
 //Servidor de Desarrollo ISNARDO
-$config['base_url'] ='http://148.224.28.135/programas/';
+//$config['base_url'] ='http://148.224.28.135/programas/';
 
 //--PRODUCCION FC--//
 //$config['base_url'] = 'http://148.224.2.177/programas/';

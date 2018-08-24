@@ -40,8 +40,10 @@ class Login extends CI_Controller {
 
 	// Check user and password
 	public function validate_user() {
+		header("access-control-allow-origin: *");
 		//Load modeL
 		$this->load->model('usuario_model');
+
 
 		//Execute Model to obtain the user's password
 		$pass = $this->usuario_model->return_password( $this->input->post('user') );
@@ -55,9 +57,10 @@ class Login extends CI_Controller {
 
 		// Output to return JSON variable with boolean data of success
 		$json = array(
-			"success" => $success,
-			"url" 		=> site_url('login/start')
+			"success" => $pass,
+			"url" 	  => site_url('login/start')
 		);
+
  		$out = json_encode( $json );
 		header('Content-Type: application/json');
 		echo $out;
