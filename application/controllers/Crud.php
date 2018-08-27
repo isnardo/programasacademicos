@@ -14,7 +14,12 @@ class Crud extends CI_Controller {
 
 	private function crud_output($output = null)
 	{
-		$this->load->view('crud.php',(array)$output);
+		$level = $this->session->userdata('level_id');
+		if( $level == 5 ){
+			$this->load->view('crud-administrador.php',(array)$output);
+		}else{
+			$this->load->view('crud-supervisor.php',(array)$output);
+		}
 	}
 
 	private function validate_session(){
@@ -318,6 +323,38 @@ class Crud extends CI_Controller {
 		$crud->display_as('ProgAcademicoId','Programa')
 			->display_as('BiblioTipoId','Tipo')
 			->display_as('BibliografiaNombre','Recurso');
+
+		$this->crud_output( $crud->render() );
+	}
+
+	public function sugerencias(){
+		$crud = $this->new_crud('Modificacion','Sugerencias');
+		$crud->set_relation('ProgAcademicoId','ProgramaAcademico','Programa Id: {ProgAcademicoId}');
+		$crud->set_relation('UsuarioId','Usuario','{UsuarioNombre} {UsuarioApellidos}');
+		$crud->set_relation('ApartadoId','Apartado','ApartadoNombre');
+		$crud->set_relation('CriterioId','Criterio','CriterioNombre');
+
+		$crud->display_as('ProgAcademicoId','Programa')
+			->display_as('ApartadoId','Apartado')
+			->display_as('ModifSugerencia','Sugerencia')
+			->display_as('ModifJustificacion','Justificación')
+			->display_as('UsuarioId','Usuario')
+			->display_as('CriterioId','Criterio')
+			->display_as('ModifFecha','Fecha')
+			->display_as('ModifId','Id')
+			->display_as('EstModifId','Estado de la Modificación');
+
+
+		$crud->columns(array(
+			 'ModifId',
+	 		 'ProgAcademicoId',
+			 'ApartadoId',
+			 'CriterioId',
+	 		 'ModifSugerencia',
+	 		 'ModifJustificacion',
+			 'UsuarioId',
+			 'ModifFecha'
+	 	));
 
 		$this->crud_output( $crud->render() );
 	}

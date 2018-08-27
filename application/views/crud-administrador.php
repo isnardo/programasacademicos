@@ -14,13 +14,14 @@ foreach($css_files as $file): ?>
 <body>
 	<div>
 		<a href='<?php echo site_url('inicio')?>'>Inicio</a> |
+		<a href='<?php echo site_url('crud/sugerencias')?>'>Sugerencia</a> |
+		<a href='<?php echo site_url('crud/programa')?>'>Programa</a> |
 		<a href='<?php echo site_url('crud/usuario')?>'>Usuario</a> |
 		<a href='<?php echo site_url('crud/facultad')?>'>Entidad</a> |
 		<a href='<?php echo site_url('crud/licenciatura')?>'>Licenciaura</a> |
 		<a href='<?php echo site_url('crud/competencia_profesional')?>'>C. Profesional</a> |
 		<a href='<?php echo site_url('crud/competencia_transversal')?>'>C. Transversal</a> |
 		<a href='<?php echo site_url('crud/materia')?>'>Materia</a> |
-		<a href='<?php echo site_url('crud/programa')?>'>Programa</a> |
 		<a href='<?php echo site_url('crud/unidad')?>'>Unidades</a> |
 		<a href='<?php echo site_url('crud/tema')?>'>Temas</a> |
 		<a href='<?php echo site_url('crud/subtema')?>'>SubTemas</a> |
