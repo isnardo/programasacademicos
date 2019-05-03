@@ -1,0 +1,41 @@
+// Instructions for INSTALL
+"Sistema para la Gestión de Programas Académicos y Actualización Curricular Continua"
+// Initials
+SiGPAACC
+// Version
+Version 0.1
+// Developers
+Developed by: Isnardo Reducindo
+Email: isnardo.reducindo@uaslp.mx
+       isnardo.rr@gmail.com
+
+
+//MINIMUN REQUIREMENTS
+
+LAMP, XAMP or WAMP Server
+PHP 7.0
+MariaDB 10.2
+Apache 2.4
+
+//INSTRUNCTIONS
+
+1. Uncompress the zip file into directory where do you want to have base url
+
+2. Update 'base_url' into application/config/config.php
+
+3. Create a database in MariaDB and update its structure with SQL file in application/database/programas_structure.sql
+
+4. Update $db['sac_fc'] array variables in application/config/database.php file with the correct data of created database
+	'hostname'
+	'username'
+	'password'
+	'database'
+
+and also if it is necessary for your server configuration update sql drive access (mysqli or pdo are recommended)
+	'dbdriver'
+
+5. Go to the base url and access to the system with default credentials for administrator. (We recomend to change default credentials for security)
+	user: admin
+	password: admin
+
+Enjoy it!!!
