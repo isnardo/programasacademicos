@@ -486,7 +486,8 @@ CREATE TABLE `NivelUsuario` (
 
 LOCK TABLES `NivelUsuario` WRITE;
 /*!40000 ALTER TABLE `NivelUsuario` DISABLE KEYS */;
-INSERT INTO `NivelUsuario` (`NivelUsuId`, `NivelUsuNombre`, `NivelUsuPrivilegios`) VALUES (NULL, 'Visitante', ''), (NULL, 'Revisor', ''), (NULL, 'Supervisor', ''), (NULL, 'Administrador', ''), (NULL, 'Super Administrador', '');
+INSERT INTO `NivelUsuario` (`NivelUsuId`, `NivelUsuNombre`, `NivelUsuPrivilegios`) VALUES (NULL, 'Visitante', ''), (NULL, 'Revisor', ''), (NULL, 'Supervisor', ''), (NULL, 'f
+istrador', ''), (NULL, 'Super Administrador', '');
 /*!40000 ALTER TABLE `NivelUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -722,7 +723,7 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` (`UsuarioId`, `UsuarioAcceso`, `UsuarioPassword`, `UsuarioFoto`, `UsuarioEmail`, `NivelUsuId`, `TipoUsuId`, `UsuarioNombre`, `UsuarioApellidos`, `FacultadId`, `LicenciaturaId`) VALUES (NULL, 'admin', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', NULL, 'isnardo.rr@gmail.com', '5', NULL, 'Administrador', 'del Sistema', NULL, NULL);
+INSERT INTO `Usuario` (`UsuarioId`, `UsuarioAcceso`, `UsuarioPassword`, `UsuarioFoto`, `UsuarioEmail`, `NivelUsuId`, `TipoUsuId`, `UsuarioNombre`, `UsuarioApellidos`, `FacultadId`, `LicenciaturaId`) VALUES (NULL, 'admin', '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918', NULL, 'isnardo.rr@gmail.com', '5', NULL, 'Administrador', 'del Sistema', NULL, NULL);
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
